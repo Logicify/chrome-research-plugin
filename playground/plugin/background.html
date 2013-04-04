@@ -1,0 +1,1194 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" version="XHTML+RDFa 1.0" dir="ltr">
+
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="next" href="/form-elements" />
+<link rel="shortcut icon" href="http://learn.javascript.ru/favicon.ico" type="image/vnd.microsoft.icon" />
+<link rel="up" href="/events-and-interfaces" />
+<link rel="shortlink" href="/node/126" />
+<meta name="Generator" content="Drupal 7 (http://drupal.org)" />
+<link rel="canonical" href="/keyboard-events" />
+<link rel="prev" href="/drag-and-drop-objects" />
+  <title>События клавиатуры | Учебник JavaScript</title>
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/keyboard-events" />
+  <meta property="og:site_name" content="JavaScript.ru" />
+  <meta property="fb:admins" content="100001562528165" />
+  <script>if (window.devicePixelRatio > 1) document.cookie='hires=1; path=/';
+  </script>
+
+  <link type="text/css" rel="stylesheet" href="http://learn.javascript.ru/files/css/css_6hUAuAC2ayQCUwY-UtuQQz19KAZpO3moaUIRPzrCQBc.css" media="all" />
+  <script type="text/javascript" src="http://learn.javascript.ru/files/js/js_bzpMAGCmzsXioD4aE2VQ1mcT1bovyEGb2_VJnc8OqxM.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+$ = jQuery;
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+
+  SyntaxHighlighter.config.clipboardSwf = '/modules/syntaxhighlighter/clipboard.swf';
+  $(function() {
+    SyntaxHighlighter.highlight();
+    })
+  
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"analytic","theme_token":"orY48JipQdFwymB2OuhlziCLwl2P71UVme3AXK9A4Ww","js":{"sites\/all\/modules\/jquery_update\/replace\/jquery\/1.9\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"public:\/\/languages\/ru_UVgamCmi1R0IgwNOfexR2zYAGixPjv_X_baErzm6oP0.js":1,"modules\/dhtml_menu\/dhtml_menu.js":1,"modules\/editor\/user.js":1,"modules\/editor\/hotkeys.js":1,"modules\/mistype\/mistype.js":1,"modules\/myfilter\/myfilter.js":1,"modules\/mytheme\/misc.js":1,"modules\/myutils\/jquery.cookie.js":1,"modules\/myutils\/jquery.alerts.js":1,"modules\/myutils\/jquery-migrate-1.1.1.js":1,"modules\/myutils\/misc.js":1,"files\/tutorial\/js\/dom.js":1,"files\/tutorial\/js\/misc.js":1,"files\/tutorial\/js\/lodash.js":1,"modules\/syntaxhighlighter\/sh\/scripts\/shCore.js":1,"modules\/syntaxhighlighter\/sh\/scripts\/shBrushCss.js":1,"modules\/syntaxhighlighter\/sh\/scripts\/shBrushJava.js":1,"modules\/syntaxhighlighter\/sh\/scripts\/shBrushJScript.js":1,"modules\/syntaxhighlighter\/sh\/scripts\/shBrushPhp.js":1,"modules\/syntaxhighlighter\/sh\/scripts\/shBrushPlain.js":1,"modules\/syntaxhighlighter\/sh\/scripts\/shBrushXml.js":1,"modules\/disqus\/disqus.js":1,"0":1,"1":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"sites\/all\/modules\/simplenews\/simplenews.css":1,"modules\/book\/book.css":1,"modules\/comment\/comment.css":1,"modules\/date\/date_api\/date.css":1,"modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"modules\/node\/node.css":1,"modules\/search\/search.css":1,"modules\/user\/user.css":1,"modules\/forum\/forum.css":1,"modules\/views\/css\/views.css":1,"modules\/ctools\/css\/ctools.css":1,"modules\/dhtml_menu\/dhtml_menu.css":1,"modules\/myutils\/jquery.alerts.css":1,"modules\/myutils\/misc.css":1,"modules\/syntaxhighlighter\/sh\/styles\/shCore.css":1,"modules\/syntaxhighlighter\/sh\/styles\/shThemeDefault.css":1,"themes\/analytic\/style.css":1,"themes\/analytic\/local.css":1,"themes\/analytic\/linkindication.css":1}},"dhtmlMenu":{"nav":"none","animation":{"effects":{"height":"height","opacity":"opacity","width":0},"speed":"500"},"effects":{"siblings":"close-same-tree","children":"none","remember":"0"},"filter":{"type":"blacklist","list":{"book-toc-246":0,"book-toc-297":0,"book-toc-511":0,"book-toc-67":0,"main-menu":0,"management":0,"navigation":0,"shortcut-set-1":0,"user-menu":0}}},"disqus":{"domain":"learnjavascriptru","url":"http:\/\/learn.javascript.ru\/keyboard-events","title":"\u0421\u043e\u0431\u044b\u0442\u0438\u044f \u043a\u043b\u0430\u0432\u0438\u0430\u0442\u0443\u0440\u044b","identifier":"node\/126"}});
+//--><!]]>
+</script>
+  <script src="/files/tutorial/browser/events/log.js"></script>
+
+<script>
+$(function() {
+document.getElementById('kinput').onkeydown = khandle
+document.getElementById('kinput').onkeyup = khandle
+document.getElementById('kinput').onkeypress = khandle
+})
+
+function khandle(e) {
+  e = e || event
+  if (document.forms.keyform[e.type + 'Ignore'].checked) return
+   
+  var evt = e.type
+  while (evt.length < 10) evt += ' '
+  showmesg(evt + 
+    ' keyCode=' + e.keyCode + 
+    ' which=' + e.which + 
+    ' charCode=' + e.charCode +
+    ' char=' + String.fromCharCode(e.keyCode || e.charCode) +
+    (e.shiftKey ? ' +shift' : '') +
+    (e.ctrlKey ? ' +ctrl' : '') +
+    (e.altKey ? ' +alt' : '') +
+    (e.metaKey ? ' +meta' : ''), 'key'
+  )
+  
+  if (document.forms.keyform[e.type + 'Stop'].checked) {
+    e.preventDefault ? e.preventDefault() : (e.returnValue = false)
+  }
+}
+</script>
+<style>
+
+#keyform label {
+  display: inline;
+}
+
+#scan-codes th, #scan-codes td {
+  text-align: center;
+}
+</style>
+</head>
+<body id="body" class="html not-front not-logged-in no-sidebars page-node page-node- page-node-126 node-type-book" >
+
+    
+<iframe name="resizer" src="http://ru.lookatcode.com/files/iframe-resize.html" style="display:none"></iframe>
+
+<div class="make-it-center">
+
+
+
+<div class="rws-primary-menu clearfix">
+  <ul class="links primary-links">
+    <li>
+      <a href="http://javascript.ru/">JavaScript.ru</a>
+          </li>
+    <li><a href="/">Учебник</a></li>
+    <li><a href="/play">Песочница</a></li>
+
+    <li><a href="http://es5.javascript.ru">Спецификация ES5</a></li>
+    <li><a href="http://javascript.ru/forum">Форум</a></li>
+    <li><a href="http://learn.javascript.ru/chat">Чат</a></li>
+    <li><a href="http://javascript.ru/courses">Курсы</a></li>
+
+    <li style="float:right"><form action="/keyboard-events" method="post" id="search-block-form" accept-charset="UTF-8"><div><div class="container-inline" style="margin-top:12px">
+<input type="text" maxlength="128" placeholder=" Найти" name="search_block_form" id="edit-search-block-form-1" value="" class="form-text" /><input type="image" style="background:inherit;border:none;height:17px;padding:0;margin:0 5px 0 3px" src="/themes/analytic/images/gray-arrow-right.png" name="op" id="edit-submit-button" value="" class="form-submit" />
+   <input type="hidden" name="form_build_id" id="yfWe65PxrD6qzpeEbtfTGLtDrEnUQTW0SJg8WA8eN-w" value="yfWe65PxrD6qzpeEbtfTGLtDrEnUQTW0SJg8WA8eN-w"  />
+<input type="hidden" name="form_token" id="edit-search-block-form-form-token" value="m7nlkiDsigIGyQBKfm2ygLj_jKCfqYWyZlFxTrFVigk"  />
+<input type="hidden" name="form_id" id="edit-search-block-form" value="search_block_form"  />
+</div>
+</div></form></li>
+  </ul>
+
+</div>
+
+
+<div id="content-toggler" class="content-toggler">
+  <span class="content-toggler-hide">Содержание (скрыть)</span>
+  <span class="content-toggler-show">Содержание (показать)</span>
+</div>
+<ul class="sec-list" id="submenu-info">
+  <li class="sec-item"><a href="http://javascript.ru/manual">Справочник</a></li>
+  <li class="sec-item"><a href="http://learn.javascript.ru/about">О сайте</a></li>
+</ul>
+
+
+<!-- admin panel   -->
+<!-- / admin panel -->
+
+
+
+<div class="column-wrapper">
+
+
+
+
+
+
+
+<!-- column-2 --><div class="column-2 
+no-left-column
+">
+
+
+		        
+
+
+<!-- PRINTING BLOCKS BEFORE THE CONTENT (with RED headers) -->
+<!-- PRINTING BLOCKS BEFORE THE CONTENT (with RED headers) -->
+
+
+    <h2 class="element-invisible">Вы здесь</h2><div class="breadcrumb"><a href="http://javascript.ru">Главная</a> » <a href="/tutorial">Учебник</a> » <a href="/events-and-interfaces">События, взаимодействие с посетителем</a></div>		
+        <div class="book-navigation book-navigation-upper" id="book-navigation-126">
+                <div class="page-links clearfix">
+                        <a title="Go to previous page" class="page-previous"
+               href="/drag-and-drop-objects">‹ Drag&#039;n&#039;Drop объектов</a>
+            
+                        <a title="Go to next page" class="page-next" href="/form-elements">Формы: свойства элементов                ›</a>
+                    </div>
+
+    </div>
+    
+		
+
+
+    <h1 class="title">События клавиатуры</h1>		
+		
+
+                         
+
+
+
+		<!-- main-content-block --><div class="main-content-block"> 
+		  <div class="region region-content">
+      <div class="block block-open 
+  block-system clearfix" id="block-system-main">
+      
+   <div class="content clearfix">
+
+
+
+<div
+     oncanplay="1" 
+    class="clearfix node node-nid-126  node-book node node-book ">
+    
+
+    
+    <ol class="toc-full">
+<li><a href="/keyboard-events#тестовый-стенд">Тестовый стенд</a></li>
+<li><a href="/keyboard-events#виды-и-свойства-событий">Виды и свойства событий</a><ol>
+<li><a href="/keyboard-events#keydown-и-keyup"><code>keydown</code> и <code>keyup</code></a></li>
+<li><a href="/keyboard-events#какими-бывают-скан-коды">Какими бывают скан-коды?</a></li>
+<li><a href="/keyboard-events#keypress"><code>keypress</code></a></li>
+<li><a href="/keyboard-events#получение-символа-в-keypress">Получение символа в <code>keypress</code></a></li></ol></li>
+<li><a href="/keyboard-events#отмена-пользовательского-ввода">Отмена пользовательского ввода</a><ol>
+<li><a href="/keyboard-events#отмена-специальных-действий">Отмена специальных действий</a></li>
+<li><a href="/keyboard-events#демо-перевод-символа-в-верхний-регистр">Демо: перевод символа в верхний регистр</a></li></ol></li>
+<li><a href="/keyboard-events#порядок-наступления-событий">Порядок наступления событий</a></li>
+<li><a href="/keyboard-events#автоповтор">Автоповтор</a></li>
+<li><a href="/keyboard-events#итого-рецепты">Итого, рецепты</a></li></ol>
+
+        
+    <div class="content clearfix ">
+
+
+    
+    <div class="field field-name-body field-type-text-with-summary field-label-hidden"><div class="field-items"><div class="field-item even"> <p>Здесь мы рассмотрим основные «клавиатурные» события и работу с ними.<br /><!--break--><br />
+<a name="keyboard-test-stand"></a></p>
+<h2><a name="тестовый-стенд" href="#тестовый-стенд" id="тестовый-стенд">Тестовый стенд</a></h2>
+<p>Для того, чтобы лучше понять, как работают события клавиатуры, можно использовать тестовый стенд.</p>
+<p>Попробуйте различные варианты нажатия клавиш в текстовом поле.</p>
+<form name="keyform" id="keyform" onsubmit="return false" style="border:solid gray 1px;margin:10px;padding:10px">
+<p>        Предотвратить действие по умолчанию для:<label><input type="checkbox" name="keydownStop" value="1" /> keydown</label>   <label><input type="checkbox" name="keypressStop" value="1" /> keypress</label>   <label><input type="checkbox" name="keyupStop" value="1" /> keyup</label><br />
+        Игнорировать:<label><input type="checkbox" name="keydownIgnore" value="1" /> keydown</label>   <label><input type="checkbox" name="keypressIgnore" value="1" /> keypress</label>   <label><input type="checkbox" name="keyupIgnore" value="1" /> keyup</label><br />
+Сфокусируйтесь на поле и нажмите какую-нибудь клавишу.<br /><input type="text" style="font-size:150%;width:600px" placeholder="Поле для тестов" id="kinput" /><br />
+Журнал:<br /><textarea rows="18" style="width:600px;border:1px solid black"></textarea><br /><input type="button" value="Очистить" onclick="logClear('key')" /></p></form>
+<p><pre class="source" data-source="brush:js;auto-links:false;collapse:'Показать код тестового стенда'" style="">
+document.getElementById('kinput').onkeydown = khandle;
+document.getElementById('kinput').onkeyup = khandle;
+document.getElementById('kinput').onkeypress = khandle;
+
+function khandle(e) {
+  e = e || event;
+  if (document.forms.keyform[e.type + 'Ignore'].checked) return;
+   
+  var evt = e.type;
+  while (evt.length &lt; 10) evt += ' '
+  showmesg(evt + 
+    ' keyCode=' + e.keyCode + 
+    ' which=' + e.which + 
+    ' charCode=' + e.charCode +
+    ' fromCharCode=' + String.fromCharCode(e.keyCode || e.charCode) +
+    (e.shiftKey ? ' +shift' : '') +
+    (e.ctrlKey ? ' +ctrl' : '') +
+    (e.altKey ? ' +alt' : '') +
+    (e.metaKey ? ' +meta' : '') +
+    (e.repeat ? ' +repeat' : ''), 'key'
+  )
+  
+  if (document.forms.keyform[e.type + 'Stop'].checked) {
+    e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+  }
+}
+</pre></p>
+<p>По мере чтения статьи, если возникнут вопросы — возвращайтесь к этому стенду.</p>
+<h2><a name="виды-и-свойства-событий" href="#виды-и-свойства-событий" id="виды-и-свойства-событий">Виды и свойства событий</a></h2>
+<h3><a name="keydown-и-keyup" href="#keydown-и-keyup" id="keydown-и-keyup"><code>keydown</code> и <code>keyup</code></a></h3>
+<p><strong>События <code>keydown/keyup</code> происходят при нажатии/отпускании клавиши и позволяют получить её <em>скан-код</em> в свойстве <code>keyCode</code>.</strong></p>
+<p>Скан-код клавиши одинаков в любой раскладке и в любом регистре. Например, клавиша <code class="key">z</code> может означать символ <code>"z"</code>, <code>"Z"</code> или <code>"я"</code>, <code>"Я"</code> в русской раскладке, но её <em>скан-код</em> будет всегда одинаков: <code>90</code>.</p>
+<p>В действии:
+<pre class="source" data-source="brush:js; html-script:true;light:true;auto-links:false" style="">
+&lt;input onkeydown="this.nextSibling.innerHTML = event.keyCode"&gt;&lt;b&gt;&lt;/b&gt;
+</pre><input size="40" placeholder="Нажмите клавишу, скан-код будет справа" onkeydown="this.nextSibling.innerHTML = event.keyCode" /><b></b></p>
+<h3><a name="какими-бывают-скан-коды" href="#какими-бывают-скан-коды" id="какими-бывают-скан-коды">Какими бывают скан-коды?</a></h3>
+<p><strong>Для буквенно-цифровых клавиш, скан-код будет равен коду соответствующей заглавной английской буквы/цифры.</strong></p>
+<p>Например, при нажатии клавиши <code class="key">S</code> (не важно, каков регистр и раскладка) её скан-код будет равен <code>"S".charCodeAt(0)</code>.</p>
+<p>С другими символами, например, знаками пунктуации, ситуация тоже понятна. Есть  таблица кодов, которую в можно взять, например, из статьи Джона Уолтера: <a href="http://unixpapa.com/js/key.html">JavaScript Madness: Keyboard Events</a>, или же можно нажать на нужную клавишу на <a href="/keyboard-events#keyboard-test-stand">тестовом стенде</a> и получить код.</p>
+<p>Когда-то в этих кодах была масса кросс-браузерных несовместимостей. Сейчас всё проще — таблицы кодов в различных браузерах почти полностью совпадают.</p>
+<p>Но некоторые несовместимости, всё же, остались. Вы можете увидеть их в таблице ниже. Слева — клавиша с символом, а справа — скан-коды в различных браузерах.</p>
+<table class="bordered" id="scan-codes"><tr><th>Клавиша</th>
+<th>Firefox</th>
+<th>Safari/Chrome/IE</th>
+<th>Opera</th>
+</tr><tr><td><code class="key">;</code></td>
+<td>59</td>
+<td>186</td>
+<td>59</td>
+</tr><tr><td><code class="key">=</code></td>
+<td>107</td>
+<td>187</td>
+<td>61</td>
+</tr><tr><td><code class="key">-</code></td>
+<td>109</td>
+<td>189</td>
+<td>45</td>
+</tr><tr><td><code class="key">,</code></td>
+<td>188</td>
+<td>188</td>
+<td>44</td>
+</tr><tr><td><code class="key">.</code></td>
+<td>190</td>
+<td>190</td>
+<td>46</td>
+</tr><tr><td><code class="key">/</code></td>
+<td>191</td>
+<td>191</td>
+<td>47</td>
+</tr><tr><td><code class="key">\</code></td>
+<td>220</td>
+<td>220</td>
+<td>92</td>
+</tr></table><h3><a name="keypress" href="#keypress" id="keypress"><code>keypress</code></a></h3>
+<p><strong>Событие <code>keypress</code> возникает сразу после <code>keydown</code>, если нажата <em>символьная</em> клавиша, т.е. нажатие приводит к появлению символа.</strong></p>
+<p>Любые буквы, цифры генерируют <code>keypress</code>. Управляющие клавиши, такие как <code class="key">Ctrl</code>, <code class="key">Shift</code>, <code class="key">F1</code>, <code class="key">F2</code>.. — <code>keypress</code> не генерируют.</p>
+<p>Событие <code>keypress</code> позволяет получить <em>код символа</em>. В отличие от скан-кода, он специфичен именно для символа и различен для <code>"z"</code> и <code>"я"</code>. </p>
+<p>Код символа хранится в свойствах: <code>charCode</code> и <code>which</code>. Здесь скрывается целое «гнездо» кросс-браузерных несовместимостей, разбираться с которыми нет никакого смысла — запомнить сложно, а на практике нужна лишь одна «правильная» функция, позволяющая получить код везде.</p>
+<p><a name="getChar"></a></p>
+<h3><a name="получение-символа-в-keypress" href="#получение-символа-в-keypress" id="получение-символа-в-keypress">Получение символа в <code>keypress</code></a></h3>
+<p><strong>Кросс-браузерная функция для получения символа из события <code>keypress</code>:</strong> </p>
+<p><pre class="source" data-source="brush:js;autorun:true;auto-links:false" style="">
+// event.type должен быть keypress
+function getChar(event) {
+  if (event.which == null) {  // IE
+    if (event.keyCode &lt; 32) return null; // спец. символ
+    return String.fromCharCode(event.keyCode) 
+  } 
+
+  if (event.which!=0 &amp;&amp; event.charCode!=0) { // все кроме IE
+    if (event.which &lt; 32) return null; // спец. символ
+    return String.fromCharCode(event.which); // остальные
+  } 
+
+  return null; // спец. символ
+}
+</pre></p>
+<p>Для общей информации — вот основные браузерные особенности, учтённые в <code>getChar(event)</code>:</p>
+<ol><li>Во всех браузерах, кроме IE, у события <code>keypress</code> есть свойство <code>charCode</code>, которое содержит код символа.</li>
+<li>При этом у Opera есть некоторые баги со специальными клавишами. Для некоторых из них, она «забывает» указать <code>charCode</code>, например, для «Backspace». А другие браузеры в этом случае код указывают.</li>
+<li>Браузер IE для <code>keypress</code> не устанавливает <code>charCode</code>. Вместо этого он записывает код символа в <code>keyCode</code> (в <code>keydown/keyup</code> там хранится скан-код).</li>
+</ol><p>Также, посмотрите — в функции выше используется проверка <code>if(event.which!=0)</code>, а не более короткая <code>if(event.which)</code>. Это не случайно! При <code>event.which=null</code> первое сравнение даст <code>true</code>, а второе — <code>false</code>.</p>
+<p>В действии:
+<pre class="source" data-source="brush:js; html-script:true;light:true;auto-links:false" style="">
+&lt;input onkeypress="this.nextSibling.innerHTML = getChar(event)+''"&gt;&lt;b&gt;&lt;/b&gt;
+</pre><input size="40" placeholder="Наберите символ, он будет справа" onkeypress="this.nextSibling.innerHTML = getChar(event)+''" /><b></b></p>
+<p><div class="warn"><div class="warn-header">Неправильный <code>getChar</code></div> <p>В сети вы можете найти другую функцию того же назначения:
+<pre class="source" data-source="brush:js;light:true;auto-links:false" style="">
+function getChar(event) {
+  return String.fromCharCode(event.keyCode || event.charCode);
+}
+</pre></p>
+<p>Она работает неверно для многих специальных клавиш, потому что не фильтрует их. Например, она возвращает символ амперсанда <code>"&amp;"</code>, когда нажата клавиша ‘Стрелка Вверх’. Кроме того, она глючит на Backspace в Opera.</p>
+ </div></p>
+<p><div class="smart"><div class="smart-header">Свойства-модификаторы</div> <p>
+Как и у других событий, связанных с пользовательским вводом, поддерживаются свойства <code>shiftKey</code>, <code>ctrlKey</code>, <code>altKey</code> и <code>metaKey</code>.</p>
+<p>Они установлены в <code>true</code>, если нажаты клавиши-модификаторы — соответственно, <code class="key">Shift</code>, <code class="key">Ctrl</code>, <code class="key">Alt</code> и <code class="key">Cmd</code> для Mac.</p>
+ </div></p>
+<h2><a name="отмена-пользовательского-ввода" href="#отмена-пользовательского-ввода" id="отмена-пользовательского-ввода">Отмена пользовательского ввода</a></h2>
+<p>Появление символа можно предотвратить, если отменить действие браузера на  <code>keydown/keypress</code>:</p>
+<p><pre class="source" data-source="brush:js; html-script:true;light:true;auto-links:false" style="">
+Попробуйте что-нибудь ввести в этих полях:
+&lt;input *!*onkeydown="return false"*/!* type="text" size="30"&gt;
+&lt;input *!*onkeypress="return false"*/!* type="text" size="30"&gt;
+</pre>
+Попробуйте что-нибудь ввести в этих полях (не получится):<br /><input onkeydown="return false" type="text" size="30" /><br /><input onkeypress="return false" type="text" size="30" /></p>
+<p><strong>В IE и Safari/Chrome отмена действия браузера при <code>keydown</code> также предотвращает само событие <code>keypress</code>.</strong></p>
+<p><strong>Некоторые мобильные устройства не генерируют <code>keypress/keydown</code>, а сразу вставляют текст в поле. Отменить ввод для них таким образом нельзя.</strong> В следующих главах мы разберём <a href="/events-change">события для элементов форм</a>, которые позволяют реагировать на такой ввод. </p>
+<p><div class="warn"><div class="warn-header">При <code>keydown/keypress</code> значение ещё старое</div> <p>На момент срабатывания <code>keydown/keypress</code> <em>клавиша ещё не обработана браузером</em>. </p>
+<p>Поэтому в обработчике значение <code>input.value</code> — старое, т.е. до ввода. Это можно увидеть в в примере ниже. Вводите символы <code>abcd..</code>, а справа будет текущее <code>input.value</code>: <code>abc..</code></p>
+<p><input onkeydown="this.nextSibling.innerHTML=this.value" type="text" placeholder="Вводите символы" /><b></b></p>
+<p>А что, если мы хотим обработать <code>input.value</code> именно после ввода? Самое простое решение — использовать событие <code>keyup</code>, либо запланировать обрабочик через <code>setTimeout(..,0)</code>.</p>
+ </div></p>
+<h3><a name="отмена-специальных-действий" href="#отмена-специальных-действий" id="отмена-специальных-действий">Отмена специальных действий</a></h3>
+<p><strong>Отменять можно не только символ, а любое действие клавиш.</strong></p>
+<p>Например, при отмене <code class="key">Backspace</code> — символ не удалится. А при отмене <code class="key">Page Down</code> — страница не прокрутится.</p>
+<p>Конечно же, есть действия, которые в принципе нельзя отменить, в первую очередь — те, которые происходят на уровне операционной системы. Комбинация Alt+F4 инициирует закрытие браузера в Windows, что бы мы ни делали в JavaScript. </p>
+<h3><a name="демо-перевод-символа-в-верхний-регистр" href="#демо-перевод-символа-в-верхний-регистр" id="демо-перевод-символа-в-верхний-регистр">Демо: перевод символа в верхний регистр</a></h3>
+<p>В примере ниже, действие браузера отменяется с помощью <code>return false</code>, а вместо него в <code>input</code> добавляется значение в верхнем регистре:</p>
+<p><pre class="source" data-source="brush:js; html-script:true;auto-links:false" style="">
+&lt;input id="my" type="text" size="2"&gt;
+&lt;script&gt;
+document.getElementById('my').onkeypress = function(e) {
+  e = e || window.event;
+
+  // спец. сочетание - не обрабатываем  
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  
+  var char = getChar(event || window.event);  
+
+  if (!char) return; // спец. символ - не обрабатываем
+  
+  this.value = char.toUpperCase();
+  
+  return false;
+}
+&lt;/script&gt;
+</pre></p>
+<p>В действии: <input id="my" type="text" size="2" /></p>
+<script>
+document.getElementById('my').onkeypress = function(e) {
+  e = e || window.event;
+
+  var char = getChar(e);  
+  
+  // спец. сочетание - не обрабатываем  
+  if (e.ctrlKey || e.altKey || e.metaKey) return;
+  if (!char) return; // спец. символ - не обрабатываем
+  
+  this.value = char.toUpperCase();
+  
+  return false;
+}
+</script>
+<p><div
+     
+    class="clearfix task-embedded node-nid-128 node node-learning-task ">
+
+
+
+
+<p class="learning-task-marks">
+  <abbr title="Насколько эта задача важна для освоения материала, от 1 до 5">Важность:</abbr> 5</p>
+
+<div class="task-formulation"> <p>Создайте поле, которое позволяет вводить с клавиатуры только цифры. Пример ниже.</p>
+<p><iframe name="ifr-515a66c518df7" onload="iframeResize(this)" frameborder="0" style="width:100%;display:none;border:1px solid black;-moz-box-sizing:border-box;box-sizing:border-box" src="/files/tutorial/browser/events/numeric-input/index.html"></iframe></p>
+<p>В поле должны нормально работать специальные клавиши Delete/Backspace и сочетания c Ctrl/Alt.</p>
+<p>Исходный документ: <a href="/play/tutorial/browser/events/numeric-input-src/index.html" class="liplay" target="_blank">tutorial/browser/events/numeric-input-src/index.html</a>.</p>
+ </div>
+
+
+
+<div class="task-hint-open">
+  Подсказка: событие</div>
+
+<div class="task-hint">
+      <div class="task-solution-header">Решение</div>
+   
+    <div class="task-hint-header">
+    Подсказка: событие  </div>
+     
+<p>Нам нужно событие <code>keypress</code>, так как по скан-коду мы не отличим, например, клавишу <code>'2'</code> обычную и в верхнем регистре (символ <code>'@'</code>).</p>
+<p>Нужно отменять действие по умолчанию (т.е. ввод), если введена не цифра.</p></div>
+<div class="task-hint-open">
+  Решение</div>
+
+<div class="task-hint">
+   
+    <div class="task-hint-header">
+    Решение  </div>
+     
+<p>Нам нужно проверять <em>символы</em> при вводе, поэтому, будем использовать событие <code>keypress</code>.</p>
+<p>Алгоритм такой: получаем символ и проверяем, является ли он цифрой. Если не является, то отменяем действие по умолчанию.</p>
+<p>Кроме того, игнорируем специальные символы и нажатия со включенным Ctrl/Alt.</p>
+<p>Итак, вот решение:
+<pre class="source" data-source="brush:js;auto-links:false" style="">
+input.onkeypress = function(e) {
+  e = e || event;
+  
+  if (e.ctrlKey || e.altKey || e.metaKey) return;  
+
+  var chr = getChar(e);
+
+  // с null надо осторожно в неравенствах, 
+  // т.к. например null &gt;= '0' =&gt; true
+  // на всякий случай лучше вынести проверку chr == null отдельно
+  if (chr == null) return;
+  
+  if (chr &lt; '0' || chr &gt; '9') {
+    return false;
+  }
+}
+</pre></p>
+<p>Полное решение тут: <a href="/play/tutorial/browser/events/numeric-input/index.html" class="liplay" target="_blank">tutorial/browser/events/numeric-input/index.html</a>.</p></div>
+
+
+<div style="text-align:right;margin-bottom:-3px">
+
+<a href="/task/pole-tolko-dlya-cifr">[Открыть задачу в новом окне]</a></div>
+
+
+
+</div>
+
+
+
+</p>
+<p><a name="keyboard-events-order"></a></p>
+<h2><a name="порядок-наступления-событий" href="#порядок-наступления-событий" id="порядок-наступления-событий">Порядок наступления событий</a></h2>
+<p>События <code>keydown/keyup</code> возникают всегда. А <code>keypress</code> — по-разному.</p>
+<p>Есть три основных варианта нажатия клавиш. Они перечислены в следующей таблице.</p>
+<table class="bordered"><tr><th>Тип</th>
+<th>Нажать на стенде</th>
+<th>События</th>
+<th>Описание</th>
+</tr><tr><td>Печатные клавиши</td>
+<td style="white-space:nowrap"><code class="key">S</code> <code class="key">1</code> <code class="key">,</code></td>
+<td><code>keydown</code><br /><code>keypress</code><br />
+–<br /><code>keyup</code></td>
+<td>Нажатие  вызывает <code>keydown</code> и <code>keypress</code>.<br />
+Когда клавишу отпускают, срабатывает <code>keyup</code>. 
+<p>Исключение — CapsLock под MacOS.
+<div style="" class="hide-closed"><a href="#" class="hide-link" onclick="$(this.parentNode).toggleClass('hide-open hide-closed'); return false">Раскрыть детали CapsLock под MacOS</a><div class="hide-content"> <p>Обработка CapsLock под MacOS глючит неимоверно:</p>
+<ul><li>В Safari/Chrome: при включении только <code>keydown</code>, при отключении только <code>keyup</code>.</li>
+<li>В Firefox: при включении и отключении только <code>keydown</code>.</li>
+<li>В Opera: вообще нет события.</li>
+</ul><p>Попробуйте на тестовом стенде.</p>
+ </div></div>
+ </p></td>
+</tr><tr><td>Специальные клавиши</td>
+<td style="white-space:nowrap"><code class="key">Alt</code> <code class="key">Esc</code> <code class="key">?</code></td>
+<td><code>keydown</code><br />
+–<br /><code>keyup</code></td>
+<td>Нажатие  вызывает <code>keydown</code>.<br />
+Когда клавишу отпускают, срабатывает <code>keyup</code>. 
+<p>Некоторые браузеры могут генерировать и <code>keypress</code>, например IE для <code class="key">Esc</code>. Попробуйте нажать <code class="key">Esc</code> на тестовом стенде в разных браузерах — и увидите: в IE <code>keypress</code> есть, а в остальных — нет.
+ </p></td>
+</tr><tr><td>Сочетания с печатной клавишей</td>
+<td style="white-space:nowrap">
+<p> <code class="key">Alt</code>+<code class="key">E</code><br /><code class="key">Ctrl</code>+<code class="key">У</code><br /><code class="key">Cmd</code>+<code class="key">1</code></p>
+</td>
+<td><code>keydown</code><br /><code>keypress?</code><br />
+–<br /><code>keyup</code></td>
+<td>
+Браузеры под Windows — не генерируют <code>keypress</code>, браузеры под MacOS — генерируют. 
+<p>Если сочетание вызвало браузерный диалог («Сохранить файл», «Открыть» и т.п.), то <code>keypress/keyup</code> не будет. </p>
+<p>В <em>русской</em> раскладке под MacOS в браузерах Safari/Firefox сочетания с <code class="key">Ctrl</code>/<code class="key">Cmd</code> не дают <code>keyCode</code> (это ошибка в браузерах). При этом для <code>Cmd</code> происходит <code>keypress</code> с <em>английским</em> кодом символа. Для проверки нажмите на тестовом стенде выше <code class="key">Ctrl</code> + <code class="key">ф</code> или <code class="key">Cmd</code> + <code class="key">ф</code>. </p>
+<p><strong>Таким образом, если использовать для обработки сочетаний лишь <code>keydown</code>, то в русской раскладке под MacOS в Safari/Firefox будут проблемы.</strong> </p>
+<p>Для сочетаний с <code class="key">Cmd</code> эти проблемы можно обойти, добавив обработку <code>keypress</code>.</p>
+</td>
+</tr></table><h2><a name="автоповтор" href="#автоповтор" id="автоповтор">Автоповтор</a></h2>
+<p>При долгом нажатии клавиши возникает <em>автоповтор</em>. По стандарту, должны генерироваться многократные события <code>keydown (+keypress)</code>, и вдобавок стоять свойство свойство <a href="http://www.w3.org/TR/DOM-Level-3-Events/#events-KeyboardEvent-repeat">repeat=true</a> у объекта события.</p>
+<p>То есть, поток событий должен быть такой:</p>
+<p><pre class="source" data-source="brush:txt;auto-links:false" style="">
+keydown
+keypress
+keydown
+keypress
+..повторяется, пока клавиша не отжата...
+keyup
+</pre></p>
+<p>Однако в реальности на это полагаться нельзя. На момент написания статьи, под Firefox(Linux) генерируется и <code>keyup</code>:</p>
+<p><pre class="source" data-source="brush:txt;auto-links:false" style="">
+keydown
+keypress
+keyup
+keydown
+keypress
+keyup
+..повторяется, пока клавиша не отжата...
+keyup
+</pre>
+…А Chrome под MacOS не генерирует <code>keypress</code>. В общем, «зоопарк». Полагаться можно только на <code>keydown</code> при каждом автонажатии и <code>keyup</code> по отпусканию клавиши.</p>
+<h2><a name="итого-рецепты" href="#итого-рецепты" id="итого-рецепты">Итого, рецепты</a></h2>
+<p>Если обобщить данные из этой таблицы и статьи, то можно сделать ряд выводов:</p>
+<ol><li>Для реализации горячих клавиш, включая сочетания — используем <code>keydown</code>.<br />
+Проблемы здесь также возникают в MacOS. Для обработки сочетаний с <code class="key">Cmd</code> в русской раскладке требуется еще и <code>keypress</code>. Попробуйте сами на стенде и увидите.</li>
+<li>Если нужен именно символ — используем <code>keypress</code>. При этом функция <code>getChar</code> позволит получить символ и отфильтровать лишние срабатывания.
+</li>
+<li>Ловля CapsLock глючит под MacOS. Её можно организовать сделать при помощи проверки <code>navigator.userAgent</code> и <code>navigator.platform</code> (кроме Opera).</li>
+</ol><p><div class="warn"><div class="warn-header">На момент срабатывания <code>keypress/keydown</code> символ ещё не введён</div> <p>Например, при работе с полем ввода в обработчике <code>input.onkeydown</code> можно получить введёный символ, но не новое значение <code>input</code>, так как браузер ещё не добавил его. И не добавит, если обработчик возвратит <code>false</code>.</p>
+<p>Чтобы обработать полное значение <code>input</code>, можно запланировать вызов функции через <a href="/settimeout-setinterval#setTimeout0">setTimeout(handler, 0)</a>. </p>
+ </div></p>
+<p>Для работы с <code>INPUT</code> и рядом других элементов, существуют <a href="/events-change">события формы</a>. Например <code>oninput</code>, которое срабатывает после любого ввода в поле. Оно надёжнее, так как происходит в том числе после вставки значения мышкой, вообще без клавиатуры. </p>
+<p><div
+     
+    class="clearfix task-embedded node-nid-509 node node-learning-task ">
+
+
+
+
+<p class="learning-task-marks">
+  <abbr title="Насколько эта задача важна для освоения материала, от 1 до 5">Важность:</abbr> 3</p>
+
+<div class="task-formulation"> <p>Создайте функцию <code>runOnKeys(func, code1, code2, ... code_n)</code>, которая запускает <code>func</code> при одновременном нажатии клавиш со скан-кодами <code>code1</code>, <code>code2</code>, …, <code>code_n</code>.</p>
+<p>Например, код ниже выведет <code>alert</code> при одновременном нажатии клавиш <code>"Q"</code> и <code>"W"</code> (в любом регистре, в любой раскладке)
+<pre class="source" data-source="brush:js;auto-links:false" style="">
+runOnKeys(
+  function() { alert("Привет!") }, 
+  "Q".charCodeAt(0), 
+  "W".charCodeAt(0)
+);
+</pre></p>
+<p>Демо: <a href="http://ru.lookatcode.com/files/tutorial/browser/events/multikeys.html" class="liplay" target="_blank">tutorial/browser/events/multikeys.html</a></p>
+ </div>
+
+
+
+<div class="task-hint-open">
+  Ход решения</div>
+
+<div class="task-hint">
+      <div class="task-solution-header">Решение</div>
+   
+    <div class="task-hint-header">
+    Ход решения  </div>
+     
+<ul><li>Функция <code>runOnKeys</code> — с переменным числом аргументов. Для их получения используйте <code>arguments</code>.</li>
+<li>Используйте два обработчика: <code>document.onkeydown</code> и <code>document.onkeyup</code>. Первый отмечает нажатие клавиши в объекте <code>pressed = {}</code>, устанавливая <code>pressed[keyCode] = true</code> а второй — удаляет это свойство. Если все клавиши с кодами из <code>arguments</code> нажаты — запускайте <code>func</code>.</li>
+<li>Возникнет проблема с повторным нажатием сочетания клавиш после <code>alert</code>, решите её.</li>
+</ul></div>
+<div class="task-hint-open">
+  Решение</div>
+
+<div class="task-hint">
+   
+    <div class="task-hint-header">
+    Решение  </div>
+     
+<a href="/play/tutorial/browser/events/multikeys.html" class="liplay" target="_blank">tutorial/browser/events/multikeys.html</a></p></div>
+
+
+<div style="text-align:right;margin-bottom:-3px">
+
+<a href="/task/otsledit-odnovremennoe-nazhatie">[Открыть задачу в новом окне]</a></div>
+
+
+
+</div>
+
+
+
+</p>
+ </div></div></div>
+<div id="book-navigation-246"
+     class="book-navigation">
+    
+    
+        <div class="page-links clearfix">
+                        <a href="/drag-and-drop-objects" class="page-previous"
+               title="На предыдущую страницу">‹ Drag&#039;n&#039;Drop объектов</a>
+                                    <a title="Go to next page" class="page-next" href="/form-elements">Формы: свойства элементов                ›</a>
+                    </div>
+        
+</div>
+
+    <div class="see-also-header">См. также</div><ul class="see-also-links"><li><a href="http://unixpapa.com/js/key.html">JavaScript Madness: Keyboard Events</a></li></ul>    </div>
+
+        <div class="node-details">
+        <div class="submitted">29.11.2010</div>
+        <div class="author"><a href="http://ikantor.moikrug.ru">Илья Кантор</a></div>
+    </div>
+    
+
+    
+    
+        <br style="clear:both">
+
+    <div class="footer-share">
+      <div style="margin-bottom:-3px">Если статья понравилась &mdash; поделитесь ей! Выберите одно или несколько:</div>
+
+<style>
+.share-list li {
+  float: left;
+  padding-top: 4px;
+  list-style: none;
+  margin: 5px;
+}
+.share-list {
+margin: 0;
+padding: 0;
+}
+</style>
+<ul class="share-list">
+<li>
+<a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru" data-size="large" data-count="none" style="display:block">Твитнуть</a>
+</li>
+<li>
+<script>
+!function(d,s,id){
+  var js,fjs=d.getElementsByTagName(s)[0];
+  if(!d.getElementById(id)){
+    js=d.createElement(s);js.id=id;
+    js.src="http://platform.twitter.com/widgets.js";
+    fjs.parentNode.insertBefore(js,fjs);
+  }
+}(document,"script","twitter-wjs");
+</script>
+
+<a href="http://vkontakte.ru/share.php?url=http%3A//learn.javascript.ru/keyboard-events&amp;title=%D0%A1%D0%BE%D0%B1%D1%8B%D1%82%D0%B8%D1%8F%20%D0%BA%D0%BB%D0%B0%D0%B2%D0%B8%D0%B0%D1%82%D1%83%D1%80%D1%8B" title="Опубликовать ссылку на статью ВКонтакте" target="_blank" class="vkontakte" style="display:inline-block" onclick="window.open(this.href, &#039;Опубликовать ссылку на пост в Вконтакте&#039;, &#039;width=600,height=300&#039;); return false">Поделиться</a>
+</li>
+
+<li style="padding:0">
+<g:plusone annotation="none" size="standard"></g:plusone>
+
+<script>
+  window.___gcfg = {lang: 'ru'};
+
+  (function() {
+    if (document.getElementById('gplus')) return;
+    var po = document.createElement('script'); po.id = 'gplus'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+
+
+
+</script>
+
+</li>
+<li>
+<div style="display:inline-block" class="fb-like" data-send="false" style="display:inline-block" data-layout="button_count" data-width="300" data-show-faces="false" data-font="arial"></div>
+</li>
+</ul>
+
+<br style="clear:both">
+    </div>
+    
+    <h2>Комментарии</h2>
+    <ol>
+    <li>Приветствуются комментарии, содержащие дополнения и вопросы по статье, и ответы на них.</li>
+    <li>Если ваш комментарий касается задачи &ndash; откройте её в отдельном окне и напишите там.</li>
+    <li>Для кода внутри строки используйте тег <code>&lt;code&gt;</code>, для блока кода &ndash; тег <code>&lt;pre&gt;</code>, если больше 10 строк &ndash; ссылку на <a href="/play">песочницу</a>.</li>
+    <li>Если что-то непонятно &ndash; пишите, что именно и с какого места.</li>
+    </ol>
+
+    
+        <div id="disqus_thread"><noscript><p><a href="http://learnjavascriptru.disqus.com/?url=http%3A%2F%2Flearn.javascript.ru%2Fkeyboard-events">View the discussion thread.</a></p></noscript></div>    
+    <div style="clear:both"></div>
+
+</div>
+</div>
+ </div>
+  </div>
+		<!-- /main-content-block --></div>
+		
+        
+
+
+
+<!-- PRINTING BLOCK AFTER THE CONTENT -->
+
+
+
+
+
+<div style="text-align:center"><a href="#body">Наверх</a></div>
+
+
+<!-- / column-2 --></div>
+
+
+
+<!-- column-3 -->
+<script>
+applyRightColumnHidden();
+</script>
+<div class="column-3">  <div class="region region-right">
+      <div class="block block-open 
+  block-block clearfix" id="block-block-1">
+      	<a href="#" class="block-title"><div class="title-toggle">»</div>PDF учебника</a>
+      
+   <div class="content clearfix"> <ul><li><a href="http://javascript.ru/node/12245">Для печати: 350р (~10$)</a></li>
+<li><a href="http://javascript.ru/node/12243">Для чтения с устройств: 350р</a></li>
+<li><a href="http://javascript.ru/node/12246">Оба варианта: 450р (~15$)</a></li>
+</ul> </div>
+ </div>
+  <div class="block block-open 
+  block-book clearfix" id="block-book-navigation">
+      	<a href="#" class="block-title"><div class="title-toggle">»</div>Содержание</a>
+      
+   <div class="content clearfix"><ul class="menu"><li class="first collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-752"><a href="/getting-started">Общая информация</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-407"><a href="/intro">Введение в JavaScript</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1135"><a href="/alternatives">Альтернативные технологии</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1317"><a href="/books">Книги по JS, HTML/CSS и не только</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-674"><a href="/pre-coding">Терминология, поддержка, справочники</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1137"><a href="/editor">Редакторы для кода</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2635"><a href="/sublime">Sublime Text: шпаргалка</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-787"><a href="/browsers">Установка браузеров, JS-консоль</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2304"><a href="/tools-browsers">Тестирование в старых браузерах</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-434"><a href="/hello-world">Привет, мир!</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-753"><a href="/first-steps">Основы JavaScript</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-1138"><a href="/structure">Структура кода</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-435"><a href="/variables">Переменные</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2645"><a href="/variable-names">Имена переменных</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1656"><a href="/types-intro">Введение в типы данных</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-636"><a href="/operators">Основные операторы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-637"><a href="/comparison">Операторы сравнения и логические значения</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1494"><a href="/bitwise-operators">Побитовые операторы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-676"><a href="/uibasic">Взаимодействие с пользователем: alert, prompt, confirm</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1140"><a href="/ifelse">Условные операторы: if, &#039;?&#039;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1150"><a href="/logical-ops">Логические операторы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-638"><a href="/while-for">Циклы while, for</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1151"><a href="/break-continue">Директивы break и continue</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1152"><a href="/switch">Конструкция switch</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1134"><a href="/function-basics">Функции</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1564"><a href="/recursion">Рекурсия, стек</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1584"><a href="/properties-and-methods">Методы и свойства</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-1655"><a href="/javascript-specials">Всё вместе: особенности JavaScript</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-2430"><a href="/writing-js">Пишем на JavaScript</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-2640"><a href="/strict-mode">Строгий режим, &quot;use strict&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1354"><a href="/coding-style">Стиль кода</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1493"><a href="/write-unmain-code">Как писать неподдерживаемый код?</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-1653"><a href="/debugging-chrome">Отладка в браузере Chrome</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-2431"><a href="/data-structures">Структуры данных</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-462"><a href="/string">Строки</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-520"><a href="/number">Числа</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-522"><a href="/object">Объекты как ассоциативные массивы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-521"><a href="/array">Массивы c числовыми индексами</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1562"><a href="/array-methods">Массивы: методы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-722"><a href="/datetime">Дата и Время</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2643"><a href="/types-conversion">Преобразование типов</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-1654"><a href="/functions-closures">Функции и замыкания</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-2444"><a href="/function-is-value">Функция - это значение</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-504"><a href="/function-declaration-expression">Function Declaration и Function Expression</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1235"><a href="/named-function-expression">Именованные функциональные выражения </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2644"><a href="/global-object">Глобальный объект</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-523"><a href="/closures">Замыкания, функции изнутри</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2429"><a href="/closures-usage">Хранение данных в замыкании, модули</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2446"><a href="/static-variables">Статические переменные</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-765"><a href="/with">Конструкция &quot;with&quot; </a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-2447"><a href="/function-arguments">Аргументы функций</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-754"><a href="/arguments-pseudoarray">Псевдо-массив arguments</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2436"><a href="/arguments-named">Именованные аргументы</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-438"><a href="/objects-more">Объекты и методы</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-1661"><a href="/object-methods">Свои объекты: конструкторы и методы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-831"><a href="/this">Контекст this в деталях</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-833"><a href="/decorators">Приём программирования &quot;Декоратор&quot;</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-2432"><a href="/types">Получение и проверка типа</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-525"><a href="/object-conversion">Преобразование объектов: toString и valueOf</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-782"><a href="/type-detection">Оператор typeof, [[Class]] и утиная типизация</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-1573"><a href="/additional">Разные темы</a><ul class="menu"><li class="first expanded dhtml-menu collapsed start-collapsed" id="dhtml_menu-2647"><a href="/timers">Таймеры</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-767"><a href="/settimeout-setinterval">setTimeout и setInterval</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2569"><a href="/setimmediate">setImmediate</a></li>
+</ul></li>
+<li class="expanded dhtml-menu collapsed start-collapsed" id="dhtml_menu-2648"><a href="/binding">Привязка контекста</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-1345"><a href="/bind">Привязка функции к объекту и карринг: &quot;bind/bindLate&quot;</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2450"><a href="/bind-late">Позднее связывание &quot;bindLate&quot;</a></li>
+</ul></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-777"><a href="/static-properties-and-methods">Статические и фабричные методы объектов</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2433"><a href="/array-iteration">Массив: Перебирающие методы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1274"><a href="/eval">Запуск кода из строки: eval </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-761"><a href="/exception">Перехват ошибок, &quot;try..catch&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2426"><a href="/json">Формат JSON</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-1421"><a href="/javascript-quiz">Тест: повторение тонких мест</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-1277"><a href="/css-for-js">CSS для JavaScript-разработчика </a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-1423"><a href="/css-why">О чём пойдёт речь</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1427"><a href="/css-units">Единицы измерения &quot;px&quot;, &quot;em&quot;, &quot;%&quot; и другие</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1429"><a href="/font-size-line-height">Свойства &quot;font-size&quot; и &quot;line-height&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2083"><a href="/white-space">Свойство white-space</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1428"><a href="/outline">Свойство &quot;outline&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1424"><a href="/box-sizing">Свойство &quot;box-sizing&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1425"><a href="/margin">Свойство &quot;margin&quot; </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1422"><a href="/display">Свойство &quot;display&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1418"><a href="/space-under-img">Лишнее место под IMG</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1430"><a href="/float">Свойство &quot;float&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1437"><a href="/overflow">Свойство &quot;overflow&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-677"><a href="/position">Свойство &quot;position&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1517"><a href="/height-percent">Особенности свойства &quot;height&quot; в %</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2449"><a href="/css-selectors">Знаете ли вы селекторы?</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1435"><a href="/css-no-ie6">CSS без IE6(7)</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1434"><a href="/css-sprite">CSS-спрайты </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1432"><a href="/css-center">Центрирование горизонтальное и вертикальное</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-1600"><a href="/css-format">Правила форматирования CSS</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-526"><a href="/document">Документ и объекты страницы</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-529"><a href="/browser-environment">Окружение: DOM, BOM и JS</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1585"><a href="/browser-objects">BOM-объекты: navigator, screen, location, frames</a></li>
+<li class="expanded dhtml-menu collapsed start-collapsed" id="dhtml_menu-628"><a href="/dom">DOM-элементы и их свойства</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-657"><a href="/dom-nodes">Дерево DOM</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2646"><a href="/dom-console">Работа с DOM из консоли</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-659"><a href="/traversing-dom">Навигация в DOM, свойства-ссылки</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-660"><a href="/basic-dom-node-properties">Свойства узлов: тип, тег, содержимое и другие</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-662"><a href="/attributes-and-custom-properties">Атрибуты и &quot;свои&quot; свойства</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1276"><a href="/travel">Интерактивное путешествие по DOM</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-663"><a href="/searching-elements-dom">Поиск: getElement* и querySelector*</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-665"><a href="/modifying-document">Добавление и удаление узлов</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1419"><a href="/multi-insert">Мультивставка: insertAdjacentHTML и DocumentFragment</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-721"><a href="/document-write">Метод document.write</a></li>
+</ul></li>
+<li class="expanded dhtml-menu collapsed start-collapsed" id="dhtml_menu-678"><a href="/view-and-position">Внешний вид: стили, прокрутка, координаты</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-667"><a href="/styles-and-classes">Стили и классы, getComputedStyle</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-666"><a href="/metrics">Размеры и прокрутка элементов</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1563"><a href="/metrics-window">Размеры и прокрутка для страницы</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-804"><a href="/coordinates">Координаты</a></li>
+</ul></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2568"><a href="/compare-document-position">Проверка вложенности и соседства</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2636"><a href="/dom-cheatsheet">DOM-шпаргалка</a></li>
+</ul></li>
+<li class="expanded active-trail dhtml-menu" id="dhtml_menu-1347"><a href="/events-and-interfaces" class="active-trail">События, взаимодействие с посетителем</a><ul class="menu"><li class="first collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-680"><a href="/events">События: основы</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-528"><a href="/introduction-browser-events">Введение в браузерные события</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-801"><a href="/obtaining-event-object">Получение объекта события</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-802"><a href="/bubbling-and-capturing">Всплытие и перехват</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-803"><a href="/default-browser-action">Действия браузера по умолчанию</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1581"><a href="/unselectable">Отмена выделения, невыделяемые элементы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-696"><a href="/event-delegation">Делегирование событий</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1638"><a href="/behavior">Шаблон проектирования &quot;поведение&quot; (behavior)</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-768"><a href="/events-and-timing-depth">Управление порядком обработки, setTimeout(...0)</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-1577"><a href="/mouse-event">События мыши</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-1578"><a href="/mouse-clicks">Введение: клики, кнопка, координаты</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1579"><a href="/mousemove-events">События движения: &quot;mouseover/out/move/leave/enter&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1582"><a href="/mousewheel">Колёсико мыши: &quot;wheel&quot; и аналоги</a></li>
+<li class="last collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-682"><a href="/fixevent">Устранение IE-несовместимостей: &quot;fixEvent&quot;</a></li>
+</ul></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1312"><a href="/drag-and-drop">Основы Drag&#039;n&#039;Drop   </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1313"><a href="/drag-and-drop-objects">Drag&#039;n&#039;Drop объектов</a></li>
+<li class="leaf active-trail dhtml-menu" id="dhtml_menu-697"><a href="/keyboard-events" class="active-trail active">События клавиатуры</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1349"><a href="/form-elements">Формы: свойства элементов</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1351"><a href="/events-change">Формы: события &quot;change&quot;, &quot;input&quot;, &quot;propertychange&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1337"><a href="/forms-methods">Формы: метод и событие &quot;submit&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-695"><a href="/focus-blur">События и методы &quot;focus/blur&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1318"><a href="/event-onscroll">Событие &quot;onscroll&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1356"><a href="/onload-onerror">События &quot;onload&quot;, &quot;onbeforeunload&quot; и &quot;onerror&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-719"><a href="/onload-ondomcontentloaded">Событие загрузки документа &quot;onDOMContentLoaded&quot; </a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2567"><a href="/detect-support">Проверка поддержки браузером</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-2300"><a href="/animation">Анимация</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-805"><a href="/js-animation">JS-Анимация </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1355"><a href="/bezier">Кривые Безье</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-1357"><a href="/css-animation">CSS-анимация</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-2565"><a href="/jquery-stub">jQuery: курс немолодого бойца [в работе]</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-1640"><a href="/jquery-intro">Введение</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1641"><a href="/jquery-search">jQuery: поиск элементов</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1642"><a href="/jquery-traversal">Навигация по jQuery-коллекции</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2641"><a href="/jquery-dom">Методы для работы с DOM [в работе]</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2566"><a href="/jquery-stub-article">... [в работе]</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-766"><a href="/widgets">Создание графических компонентов</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-1597"><a href="/widgets-intro">Введение</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1591"><a href="/widgets-markup">Вёрстка графических компонентов</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1320"><a href="/widgets-oop">Процедурное и объектное программирование</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1321"><a href="/internal-external-interface">Внутренний и внешний интерфейс</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1593"><a href="/widgets-structure">Соглашения в коде виджета</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1575"><a href="/custom-events">Свои события, подписка-уведомление</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1335"><a href="/widget-tasks">Практика, практика, практика!</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1353"><a href="/templates">Шаблонизация в JavaScript</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-1635"><a href="/widget-tasks-2">Еще практика! </a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-1333"><a href="/inheritance-prototypes">Продвинутая работа с объектами</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-798"><a href="/prototype">Прототип: наследование и методы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-826"><a href="/classes">&quot;Классы&quot; в JavaScript</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-825"><a href="/constructor">Детали: свойство &quot;constructor&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-824"><a href="/instanceof">Проверка прототипа: &quot;instanceof&quot; </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-813"><a href="/class-inheritance">Наследование для классов в JavaScript</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1636"><a href="/inheritance-intro">Область применения наследования</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1344"><a href="/class-extend">ООП: фреймворк Class.extend </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1322"><a href="/functional-inheritance">ООП: функциональная реализация классов</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1338"><a href="/why-prototypes-better">ООП: почему наследование &quot;на прототипах&quot; - лучше</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2639"><a href="/native-prototypes">Расширение встроенных прототипов</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-1592"><a href="/descriptors-getters-setters">Дескриптор свойства, геттеры и сеттеры</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-1586"><a href="/optimize">Оптимизация</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-1515"><a href="/memory-management">Управление памятью в JS и DOM</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1576"><a href="/memory-leaks">Утечки памяти </a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-774"><a href="/script-place-optimize">Оптимизация скриптов: dom, async, defer [в работе]</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-2458"><a href="/compress">Сжатие JavaScript</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-2455"><a href="/minification">Современные сжиматели JavaScript</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2456"><a href="/better-minification">Улучшаем сжатие кода</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2457"><a href="/gcc-advanced-optimization">GCC: продвинутые оптимизации</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2459"><a href="/gcc-check-types">GCC: статическая проверка типов </a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2460"><a href="/gcc-closure-library">GCC: интеграция с Google Closure Library</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-1340"><a href="/extra">Разное</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-1339"><a href="/lib">Мини-библиотека функций учебника</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1583"><a href="/vydelenie-range-textrange-i-selection">Выделение: Range, TextRange и Selection</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1314"><a href="/drag-and-drop-plus">Применяем ООП: Drag&#039;n&#039;Drop++</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-1550"><a href="/dataset-api">Свойство dataSet для data-* атрибутов</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2649"><a href="/cookie">Куки, document.cookie </a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2637"><a href="/notes">Разные задачи-заметки [в работе]</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-755"><a href="/frames-and-windows">Окна и Фреймы</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-757"><a href="/window-open">Открытие новых окон</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-760"><a href="/window-properties-and-methods">Окно браузера: свойства и методы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-763"><a href="/window-focus">Focus, привлечение внимания к окну</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-756"><a href="/iframes">Общение с окном в ифрейме </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-758"><a href="/same-origin-policy">Ограничение &quot;Same Origin&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-759"><a href="/cross-window-messaging-with-postmessage">Общение окон с разных доменов: postMessage </a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-764"><a href="/clickjacking">Атака Clickjacking и защита от неё</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-785"><a href="/regular-expressions-javascript">Регулярные выражения [в работе]</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-789"><a href="/regexp-introduction">Введение</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-784"><a href="/regexp-character-classes">Символьные классы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-786"><a href="/regexp-special-characters">Специальные символы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-790"><a href="/regexp-flags">Флаги</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-788"><a href="/regexp-character-sets-and-ranges">Наборы и диапазоны символов</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-791"><a href="/regexp-numeric-quantifiers">Цифровые квантификаторы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-818"><a href="/regexp-quantifiers">Quantifiers +, * and ?</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-792"><a href="/regexp-greedy-and-lazy">Greedy and Lazy</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-793"><a href="/regexp-ahchors-and-multiline-mode">Ahchors and multiline mode</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-819"><a href="/regexp-word-boundary">Word boundary</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-828"><a href="/regexp-infinite-backtracking-problem">Infinite backtracking problem</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-795"><a href="/regexp-groups">Groups</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-794"><a href="/regexp-alternation">Alternation </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-820"><a href="/regexp-methods">Regular expressions methods </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-827"><a href="/regexp-practice">Practice </a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2301"><a href="/regexp-specials">Особенности регулярных выражений в Javascript</a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-2302"><a href="/tools">Сундучок с инструментами</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-2305"><a href="/tools-browser-extensions">Полезные расширения Firefox и Chrome</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2452"><a href="/ie-visual-studio">Отладка для Internet Explorer (в Visual Studio)</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2454"><a href="/fiddler">Скриптуемый отладочный прокси Fiddler</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2453"><a href="/ie-http-analyzer">IE HTTP Analyzer </a></li>
+</ul></li>
+<li class="collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-1474"><a href="/hooray">Ура, я знаю JavaScript!</a><ul class="menu"><li class="first last leaf dhtml-menu" id="dhtml_menu-1475"><a href="/chto-izuchat-dalshe">Что изучать дальше</a></li>
+</ul></li>
+<li class="last collapsed dhtml-menu collapsed start-collapsed" id="dhtml_menu-2306"><a href="/ajax">AJAX</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-2307"><a href="/ajax-intro">Введение в AJAX и COMET</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2309"><a href="/ajax-nodejs">Node.JS для решения задач</a></li>
+<li class="expanded dhtml-menu collapsed start-collapsed" id="dhtml_menu-2564"><a href="/xhr">XMLHttpRequest</a><ul class="menu"><li class="first leaf dhtml-menu" id="dhtml_menu-2308"><a href="/ajax-xmlhttprequest">XMLHttpRequest</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2425"><a href="/ajax-formats">Форматы данных для AJAX</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2310"><a href="/xhr-forms">XMLHttpRequest и POST, отсылка форм</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2427"><a href="/xhr-longpoll">XMLHttpRequest: длинные опросы</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2311"><a href="/xhr-crossdomain">Кросс-доменный XMLHttpRequest</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2422"><a href="/xhr-onprogress">Загрузка c индикацией прогресса</a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2423"><a href="/xhr-resume">Возобновляемая загрузка с XMLHttpRequest</a></li>
+</ul></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2312"><a href="/ajax-jsonp">Запрос данных через SCRIPT, формат JSONP</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2367"><a href="/ajax-iframe">AJAX-запросы через IFRAME </a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2369"><a href="/ajax-iframe-htmlfile">IE: Скрытие IFRAME в ActiveX &quot;htmlfile&quot;</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2368"><a href="/ajax-iframe-xdomain">Кросс-доменные запросы через IFRAME</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2424"><a href="/comet-iframe">COMET через IFRAME</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2448"><a href="/server-sent-events">EventSource - события с сервера</a></li>
+<li class="leaf dhtml-menu" id="dhtml_menu-2370"><a href="/websockets">WebSocket </a></li>
+<li class="last leaf dhtml-menu" id="dhtml_menu-2428"><a href="/ajax-summary">Таблица транспортов и их возможностей </a></li>
+</ul></li>
+</ul></div>
+ </div>
+  <div class="block block-open 
+  block-block clearfix" id="block-block-3">
+      	<a href="#" class="block-title"><div class="title-toggle">»</div>Полезная реклама</a>
+      
+   <div class="content clearfix"><div style="text-align:center"><a href="http://www.jetbrains.com/webstorm/?utm_source=javascript.ru&utm_medium=banner2&utm_campaign=webstorm" style="display:block;width:200px;height:200px;background:url(/files/ad/ws_2.png)"></a></div>
+</div>
+ </div>
+  <div class="block block-open 
+  block-block clearfix" id="block-block-5">
+      	<a href="#" class="block-title"><div class="title-toggle">»</div>Апгрейд учебника</a>
+      
+   <div class="content clearfix"> <p>Сейчас создаётся «апгрейд» учебника в форме видеокурса. <a href="/videocourse">Подробности тут</a>.</p>
+ </div>
+ </div>
+  <div class="block block-open 
+  block-mistype clearfix" id="block-mistype-mistype">
+      	<a href="#" class="block-title"><div class="title-toggle">»</div>Нашли опечатку?</a>
+      
+   <div class="content clearfix">Нашли опечатку на сайте? Что-то кажется странным?
+Выделите соответствующий текст и нажмите Ctrl+Enter!</div>
+ </div>
+  <div class="block block-open 
+  block-disqus clearfix" id="block-disqus-disqus_recent_comments">
+      	<a href="#" class="block-title"><div class="title-toggle">»</div>Последние комментарии</a>
+      
+   <div class="content clearfix"><div id="dsq-recentcomments" class="dsq-widget"><script type="text/javascript" src="http://disqus.com/forums/learnjavascriptru/recent_comments_widget.js?num_items=5&amp;excerpt_length=200&avatar_size=32"></script></div></div>
+ </div>
+  <div class="block block-open 
+  block-block clearfix" id="block-block-4">
+      	<a href="#" class="block-title"><div class="title-toggle">»</div>Поделись!</a>
+      
+   <div class="content clearfix">Помоги другим узнать о хорошей статье!
+<div style="height:120px">
+
+<a href="https://twitter.com/share" class="twitter-share-button" data-lang="ru" data-size="large" data-count="none">Твитнуть</a>
+
+<script>
+!function(d,s,id){
+  var js,fjs=d.getElementsByTagName(s)[0];
+  if(!d.getElementById(id)){
+    js=d.createElement(s);js.id=id;  
+    js.src="//platform.twitter.com/widgets.js";  
+    fjs.parentNode.insertBefore(js,fjs);
+  }
+}(document,"script","twitter-wjs");
+
+window.___gcfg = {lang: 'ru'};
+
+  (function() {
+    if (document.getElementById('gplus')) return;
+    var po = document.createElement('script'); po.id = 'gplus'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+
+</script>
+
+<div style="margin-bottom:5px" class="fb-like" data-send="false" data-layout="button_count" data-width="300" data-show-faces="false" data-font="arial"></div>
+
+<style>
+.vk-share-wrapper td { padding: 0 }
+</style>
+<div class="vk-share-wrapper">
+<script type="text/javascript" src="http://vkontakte.ru/js/api/share.js?9" charset="windows-1251"></script>
+<script>
+window.VK && document.write(VK.Share.button({
+  url: "http://learn.javascript.ru/keyboard-events",
+  title: "События клавиатуры",
+  image: "http://learn.javascript.ru/themes/analytic/images/smart.gif",
+  noparse: true}, { type: "round", text: 'Поделиться' }));
+
+</script>
+</div>
+
+<div style="margin-top:6px">
+<g:plusone annotation="inline" width="120" size="standard" style="vertical-align:middle"></g:plusone>
+</div>
+</div></div>
+ </div>
+  </div>
+</div>
+<!-- / column-3 -->
+
+
+<script>
+applyBlockCollapse();
+</script>
+</div> 
+<!-- column wrapper -->
+
+<!-- footer -->
+ 
+  
+<!-- footer -->
+<div id="footer" class="clearfix">
+
+
+    
+    <div class="clearfix">
+
+Обновления &mdash; в твиттере: <a href="https://twitter.com/iliakan" class="twitter-follow-button" data-show-count="false" data-lang="ru">Читать @iliakan</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="http://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<style>
+.twitter-follow-button {
+vertical-align: middle;
+display: inline-block;
+}
+</style>
+
+        <div>Текст и код на этом сайте публикуются под открытой лицензией <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/deed.ru">CC BY-NC-SA</a>.<br>
+          JavaScript&trade; &ndash; зарегистрированная торговая марка Oracle. Этот сайт не имеет отношения к Oracle.
+            </div>
+
+        <p>&copy; <a href="http://ikantor.moikrug.ru">Илья Кантор</a>, 2011-2012. Помогал Алексей Шистеров.</p>
+
+</div>
+
+</div>
+<!-- /footer -->
+
+
+<script>
+
+    var _gaq = window._gaq = [];
+    _gaq.push(["_addOrganic", "go.mail.ru","q"]);
+    _gaq.push(["_addOrganic", "nova.rambler.ru","query"]);
+    _gaq.push(["_addOrganic", "nigma.ru", "s"]);
+    _gaq.push(["_addOrganic", "blogs.yandex.ru", "text", true]);
+    _gaq.push(["_addOrganic", "webalta.ru", "q"]);
+    _gaq.push(["_addOrganic", "aport.ru", "r"]);
+    _gaq.push(["_addOrganic", "akavita.by", "z"]);
+    _gaq.push(["_addOrganic", "meta.ua", "q"]);
+    _gaq.push(["_addOrganic", "bigmir.net", "q"]);
+    _gaq.push(["_addOrganic", "tut.by", "query"]);
+    _gaq.push(["_addOrganic", "all.by", "query"]);
+    _gaq.push(["_addOrganic", "i.ua", "q"]);
+    _gaq.push(["_addOrganic", "online.ua", "q"]);
+    _gaq.push(["_addOrganic", "a.ua", "s"]);
+    _gaq.push(["_addOrganic", "ukr.net", "search_query"]);
+    _gaq.push(["_addOrganic", "search.com.ua", "q"]);
+    _gaq.push(["_addOrganic", "search.ua", "query"]);
+    _gaq.push(["_addOrganic", "poisk.ru", "text"]);
+    _gaq.push(["_addOrganic", "km.ru", "sq"]);
+    _gaq.push(["_addOrganic", "liveinternet.ru", "ask"]);
+    _gaq.push(["_addOrganic", "quintura.ru", "request"]);
+    _gaq.push(["_addOrganic", "search.qip.ru","query"]);
+    _gaq.push(["_addOrganic", "gde.ru","keywords"]);
+    _gaq.push(["_addOrganic", "search.ukr.net","search_query"]);
+    _gaq.push(["_addOrganic", "gogo.ru","q"]);
+
+    _gaq.push(['_setAccount', 'UA-2056213-16']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+        var ga = document.createElement('script');
+        ga.src = 'http://www.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "http://connect.facebook.net/ru_RU/all.js#xfbml=1&appId=112959575461438";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter17649010 = new Ya.Metrika({id:17649010, enableAll: true});
+        } catch(e) { }
+    });
+    
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/17649010" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+<!-- /footer -->
+
+
+
+</div>
+
+
+
+    
+</body>
+</html>

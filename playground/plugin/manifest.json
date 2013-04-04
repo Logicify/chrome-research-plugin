@@ -1,0 +1,21 @@
+﻿{
+    "name": "GoogleMark",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "Marks google search results",
+	"browser_action": {
+	"default_icon": "icon.png"},
+    "background": {
+        "page": "background.html"
+    },
+    "permissions": [
+        "tabs",
+        "webNavigation",
+        "contextMenus",
+        "*://*.google.com/*",
+        "*://*.google.ru/*"
+    ]
+       
+    
+    
+}

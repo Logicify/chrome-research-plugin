@@ -1,0 +1,42 @@
+{
+    "name": "GoogleMark",
+    "version": "1.0",
+    "manifest_version": 2,
+    "description": "Marks google search results",
+    "browser_action": {
+        "default_icon": "icon.png",				
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": [ 
+                "*://*.google.com/*",
+                "*://*.google.ru/*" 
+            ],
+            "js": [
+                "googleMarker.js"
+            ],
+            "css": [
+                "googleMarker.css"
+            ]
+        }
+    ],
+    "background": {
+        "page": "background.html"
+    },
+    "permissions": [
+        "tabs",
+        "webNavigation",
+        "contextMenus",
+        "*://*.google.com/*",
+        "*://*.google.ru/*"
+    ],
+    "icons": {
+        "16": "menu-icon-16x16.png"
+    },
+    "web_accessible_resources": [
+        "green.png",
+        "yellow.png",
+        "red.png"
+    ]
+}
