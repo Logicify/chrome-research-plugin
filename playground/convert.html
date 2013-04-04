@@ -1,3 +1,44 @@
+<<<<<<< HEAD
+sdsdsdsdsdsDSDSDSDSDSDSDSDSDSDSDSDSDSDS<<<<<<< HEAD
+<html> // fdfdfdfdfdfdfd
+=======
+<html>
+>>>>>>> 2a1278da2a8d537164785a1fa8165e5e6b07e1a0
+<head>
+<script LANGUAGE="JavaScript">
+function convert(form) {
+//получаем данные из поле ввода, преобразуя их в Integer
+ base_from = parseInt(form.base_from.value);
+ base_to = parseInt(form.base_to.value);
+//преобразуем данные по основанию base_from в десятичную систему
+ num = parseInt(form.num.value, base_from);
+//преобразуем данные из десятичной в систему по указанному основанию base_to
+ amount = num.toString(base_to);
+//выводим результат
+ form.amount.value = amount
+}
+</script>
+
+<title>inti</title>
+</head>
+<body>
+<form name="Convert_form">
+ <p><strong>Converter:</strong></p>
+ <p> Translate <input type="text" name="num" size="8">
+ from system <input type="text" name="base_from" size="8" value="10"
+ onBlur="if ((this.value<1)||(this.value>36)){alert(
+ 'Основание должно быть от 2 до 36.');this.select();this.focus();}">
+ in system <input type="text" name="base_to" size="8" value="2"
+ onBlur="if ((this.value<1)||(this.value>36)){alert(
+ 'Основание должно быть от 2 до 36.');this.select();this.focus();}">
+ <input type="button" value=" = " onclick="convert(this.form)">
+ <input type="text" name="amount" size="15">
+ </p>
+</form>
+<p align="left">only 2-36.</p>
+</body>
+</html>
+=======
 
 <html>
 
@@ -35,3 +76,4 @@ function convert(form) {
 <p align="left">only 2-36.</p>
 </body>
 </html>
+>>>>>>> fa424fb9e5e849f8904911bde034e7746a5f767f
