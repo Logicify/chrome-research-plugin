@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+
+<link rel="stylesheet" href="popup.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="jquery.min.js"></script>
+
+</head>
+
+<body style="width: 100%;">
+
+        <div id="content" class="centered">Я пока ничего не знаю, извините...</div>
+
+<ul id="navigation">
+        <li class="one selected" id="1"><a href="#"><img src="icons/icon_128.png" width="32" /></a></li>
+        <li class="two" id="2"><a href="#"><img src="icons/lightbulb.gif" width="32" /></a></li>
+        <li class="shadow"></li>
+</ul>
+<script type="text/javascript">
+var lb_port;
+var initialized = false;
+var stats = new Object;
+ 
+function init() {
+  $("ul#navigation li a").click(tabClick);
+  //setContent($("ul#navigation li.selected a").parents()[0].id);
+  initialized = true;
+  //Подключиться к порту для обмена сообщениями
+  //с основной частью расширения
+  lb_port = chrome.extension.connect({name: "leprobutton"});
+  //обработчик входящего сообщения
+  lb_port.onMessage.addListener(lb_port_listener);
+
+  //Запрашиваем карму, рейтинг,вещи.инбокс и т.п.
+  lb_port.postMessage({"content": "get_stats"});
+}
+
+function lb_port_listener(msg) {
+  console.log("В порт "+ lb_port.name +" пришло сообщение '" + msg.content + "'");
+  if (msg.content == "stats" && initialized) {
+    stats = msg;
+    setContent($("ul#navigation li.selected a").parents()[0].id);
+  }
+}
+
+function tabClick() {
+  $("ul#navigation li").removeClass("selected");
+  $(this).parents().addClass("selected");
+  setContent($(this).parents()[0].id);
+  return false;
+}
+
+function setContent(tabId){
+var tabText = "<table><tbody>";
+  if (tabId == "1") {
+    k = stats.karma;
+    r = stats.rating;
+    d = stats.d_karma;
+    my_up = stats.myunreadposts;
+    my_uc = stats.myunreadcomms;
+    in_up = stats.inboxunreadposts;
+    in_uc = stats.inboxunreadcomms;
+    t = k + "(" + d +")";
+    tabText += "<tr><td class=\"small\"><a href=\""+stats.lepraURL+"\" target=\"_blank\"><img src=\"icons/icon_128.png\" width=\"20\" title=\"Карма\"/></a></td><td><a href=\""+stats.lepraUSERS+stats.whoami+"\" target=\"_blank\">"+t+"</a></td></tr>";
+    tabText += "<tr><td class=\"small\"><a href=\""+stats.lepraUSERS+stats.whoami+"\" target=\"_blank\"><img src=\"icons/rating.png\" height=\"20\" title=\"Рейтинг\"/></a></td><td><a href=\""+stats.lepraUSERS+stats.whoami+"\" target=\"_blank\">"+r+"</a></td></tr>";
+    tabText += "<tr><td class=\"small\"><a href=\""+stats.lepraMY+"\" target=\"_blank\"><img src=\"icons/my.png\" height=\"20\" title=\"Мои вещи\"/></a></td><td><a href=\""+stats.lepraMY+"\" target=\"_blank\">"+my_up+"/"+my_uc+"</a></td></tr>";
+    tabText += "<tr><td class=\"small\"><a href=\""+stats.lepraINBOX+"\" target=\"_blank\"><img src=\"icons/mail.png\" height=\"20\" title=\"Инбокс\"/></a></td><td><a href=\""+stats.lepraINBOX+"\" target=\"_blank\">"+in_up+"/"+in_uc+"</a></td></tr>";
+  }
+  tabText += "</tbody></table>";
+  $(content).html(tabText);
+}
+
+$(document).ready(init);
+</script>
+</body>
+</html>
