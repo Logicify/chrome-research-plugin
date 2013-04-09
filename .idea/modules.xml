@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/chrome-plugin-samples/basic/basic.iml" filepath="$PROJECT_DIR$/chrome-plugin-samples/basic/basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chrome-plugin-samples/commands/commands.iml" filepath="$PROJECT_DIR$/chrome-plugin-samples/commands/commands.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chrome-plugin-samples/contentSettings/contentSettings.iml" filepath="$PROJECT_DIR$/chrome-plugin-samples/contentSettings/contentSettings.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chrome-plugin-samples/live-headers/live-headers.iml" filepath="$PROJECT_DIR$/chrome-plugin-samples/live-headers/live-headers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chrome-plugin-samples/make_page_red/make_page_red.iml" filepath="$PROJECT_DIR$/chrome-plugin-samples/make_page_red/make_page_red.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chrome-plugin-samples/notifications/notifications.iml" filepath="$PROJECT_DIR$/chrome-plugin-samples/notifications/notifications.iml" />
+      <module fileurl="file://$PROJECT_DIR$/playground/playground.iml" filepath="$PROJECT_DIR$/playground/playground.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chrome-plugin-samples/print/print.iml" filepath="$PROJECT_DIR$/chrome-plugin-samples/print/print.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chrome-plugin-samples/set_icon_path/set_icon_path.iml" filepath="$PROJECT_DIR$/chrome-plugin-samples/set_icon_path/set_icon_path.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chrome-plugin-samples/set_page_color/set_page_color.iml" filepath="$PROJECT_DIR$/chrome-plugin-samples/set_page_color/set_page_color.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chrome-plugin-samples/showHistoryFilter/showHistoryFilter.iml" filepath="$PROJECT_DIR$/chrome-plugin-samples/showHistoryFilter/showHistoryFilter.iml" />
+    </modules>
+  </component>
+</project>
+
