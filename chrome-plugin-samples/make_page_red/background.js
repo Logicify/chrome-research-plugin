@@ -8,7 +8,7 @@ chrome.browserAction.onClicked.addListener(function(tab) {
       null, {code:"document.body.style.background='red !important'"});
 });
 
-chrome.browserAction.setBadgeBackgroundColor({color:[0, 200, 0, 100]});
+chrome.browserAction.setBadgeBackgroundColor({color:[0, 20, 0, 100]});
 
 var i = 0;
 window.setInterval(function() {
