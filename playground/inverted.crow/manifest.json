@@ -1,33 +1,33 @@
 {
-  "name": "Research plugin",
-  "description": "Press Ctrl+Shift+Y to open the window",
-  "version": "1.0",
-  "manifest_version": 2,
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
-  "permissions": [
-	"tabs",
-	"http://*",
-	"debugger",
-	"bookmarks"
-  ],
-  "browser_action": {
-	"default_popup": "popup.html",
-    "default_icon": "icon.png"
-  },
-  "content_scripts": [
-    {
-      "matches": ["http://*"],
-      "js": ["content.js"]
+    "name": "Research plugin",
+    "description": "Press Ctrl+Shift+Y to open the window",
+    "version": "1.0",
+    "manifest_version": 2,
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "tabs",
+        "http://*",
+        "debugger",
+        "bookmarks"
+    ],
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": "icon.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*"],
+            "js": ["content.js"]
+        }
+    ],
+    "commands": {
+        "_execute_browser_action": {
+            "suggested_key": {
+                "default": "Ctrl+Shift+Y"
+            }
+        }
     }
-  ],
-  "commands": {
-    "_execute_browser_action": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+Y"
-      }
-    }
-  }
 }
