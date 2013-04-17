@@ -3,44 +3,44 @@ function createMenu() {
         "*://*.google.com/*",
         "*://*.google.ru/*"
     ];
-    
+
     var root = chrome.contextMenus.create({
         title: "Mark as",
         contexts: [ "link" ],
         documentUrlPatterns: urls
     });
-    
+
     chrome.contextMenus.create({
         title: "Green",
         contexts: [ "link" ],
         parentId: root,
         documentUrlPatterns: urls,
-        onclick: function(info, tab) {
-            chrome.tabs.executeScript(tab.id, { 
-                code: "googleMarker.markUrl('" + info.linkUrl + "', 'green')" 
+        onclick: function (info, tab) {
+            chrome.tabs.executeScript(tab.id, {
+                code: "googleMarker.markUrl('" + info.linkUrl + "', 'green')"
             });
         }
     });
-    
+
     chrome.contextMenus.create({
         title: "Yellow",
         contexts: [ "link" ],
         parentId: root,
         documentUrlPatterns: urls,
-        onclick: function(info, tab) {
-            chrome.tabs.executeScript(tab.id, { 
-                code: "googleMarker.markUrl('" + info.linkUrl + "', 'yellow')" 
+        onclick: function (info, tab) {
+            chrome.tabs.executeScript(tab.id, {
+                code: "googleMarker.markUrl('" + info.linkUrl + "', 'yellow')"
             });
         }
     });
-    
+
     chrome.contextMenus.create({
         title: "Red",
         contexts: [ "link" ],
         parentId: root,
         documentUrlPatterns: urls,
-        onclick: function(info, tab) {
-            chrome.tabs.executeScript(tab.id, { 
+        onclick: function (info, tab) {
+            chrome.tabs.executeScript(tab.id, {
                 code: "googleMarker.markUrl('" + info.linkUrl + "', 'red')"
             });
         }
@@ -50,11 +50,11 @@ function createMenu() {
 createMenu();
 
 chrome.extension.onRequest.addListener(
-    function(request, sender, sendResponse) {
-        switch(request.action) {
+    function (request, sender, sendResponse) {
+        switch (request.action) {
             case "save":
                 var $list = $("#" + request.color);
-                if($list.lengh == 0) {
+                if ($list.lengh == 0) {
                     return;
                 }
                 $list.append($("<li>").append(request.url));
@@ -67,25 +67,25 @@ chrome.extension.onRequest.addListener(
 );
 
 chrome.webNavigation.onDOMContentLoaded.addListener(
-    function(details) {
-        if(details.frameId != 0) {
+    function (details) {
+        if (details.frameId != 0) {
             return;
         }
         chrome.tabs.executeScript(details.tabId, {
-                code: "googleMarker.preparePage()" 
+                code: "googleMarker.preparePage()"
             }
         );
         var colors = ["green", "yellow", "red"];
-        for(var i = 0; i < colors.length; ++i) {
+        for (var i = 0; i < colors.length; ++i) {
             var $urls = $("#" + colors[i] + " li");
-            if($urls.length == 0) {
+            if ($urls.length == 0) {
                 continue;
             }
-            
-            $urls.each(function() {
+
+            $urls.each(function () {
                 chrome.tabs.executeScript(details.tabId, {
-                        code: "googleMarker.restoreUrlMark('" + 
-                            this.innerText + "', '" + colors[i] + "')"    
+                        code: "googleMarker.restoreUrlMark('" +
+                            this.innerText + "', '" + colors[i] + "')"
                     }
                 );
             });

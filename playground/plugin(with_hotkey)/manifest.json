@@ -1,30 +1,30 @@
 {
-  "name": "Research plugin",
-  "description": "Press Ctrl+Shift+Y to open the window",
-  "version": "1.0",
-  "manifest_version": 2,
-  "background": {
-    "scripts": ["background.js"],
-    "persistent": false
-  },
-  "permissions": [
-	"tabs",
-	"http://*/*",
-	"debugger",
-	"bookmarks"
-  ],
-  "browser_action": {
-	"default_popup": "popup.html",
-    "default_icon": "icon.png"
-  },
-   "content_scripts": [
-    {
-      "matches": ["http://*/*"],
-      "js": ["content.js"],
-		"run_at": "document_start"
-    }
-  ],
-  "web_accessible_resources": [
-    "/content.js"
-  ]
+    "name": "Research plugin",
+    "description": "Press Ctrl+Shift+Y to open the window",
+    "version": "1.0",
+    "manifest_version": 2,
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "tabs",
+        "http://*/*",
+        "debugger",
+        "bookmarks"
+    ],
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_icon": "icon.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*/*"],
+            "js": ["content.js"],
+            "run_at": "document_start"
+        }
+    ],
+    "web_accessible_resources": [
+        "/content.js"
+    ]
 }

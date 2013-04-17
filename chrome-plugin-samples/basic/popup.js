@@ -16,118 +16,120 @@
  * @constructor
  */
 var PopupController = function () {
-  this.button_ = document.getElementById('button');
-  this.timeframe_ = document.getElementById('timeframe');
-  this.addListeners_();
+    this.button_ = document.getElementById('button');
+    this.timeframe_ = document.getElementById('timeframe');
+    this.addListeners_();
 };
 
 PopupController.prototype = {
-  /**
-   * A cached reference to the button element.
-   *
-   * @type {Element}
-   * @private
-   */
-  button_: null,
+    /**
+     * A cached reference to the button element.
+     *
+     * @type {Element}
+     * @private
+     */
+    button_: null,
 
-  /**
-   * A cached reference to the select element.
-   *
-   * @type {Element}
-   * @private
-   */
-  timeframe_: null,
+    /**
+     * A cached reference to the select element.
+     *
+     * @type {Element}
+     * @private
+     */
+    timeframe_: null,
 
-  /**
-   * Adds event listeners to the button in order to capture a user's click, and
-   * perform some action in response.
-   *
-   * @private
-   */
-  addListeners_: function () {
-    this.button_.addEventListener('click', this.handleClick_.bind(this));
-  },
+    /**
+     * Adds event listeners to the button in order to capture a user's click, and
+     * perform some action in response.
+     *
+     * @private
+     */
+    addListeners_: function () {
+        this.button_.addEventListener('click', this.handleClick_.bind(this));
+    },
 
-  /**
-   * Given a string, return milliseconds since epoch. If the string isn't
-   * valid, returns undefined.
-   *
-   * @param {string} timeframe One of 'hour', 'day', 'week', '4weeks', or
-   *     'forever'.
-   * @returns {number} Milliseconds since epoch.
-   * @private
-   */
-  parseMilliseconds_: function (timeframe) {
-    var now = new Date().getTime();
-    var milliseconds = {
-      'hour': 60 * 60 * 1000,
-      'day': 24 * 60 * 60 * 1000,
-      'week': 7 * 24 * 60 * 60 * 1000,
-      '4weeks': 4 * 7 * 24 * 60 * 60 * 1000
-    };
+    /**
+     * Given a string, return milliseconds since epoch. If the string isn't
+     * valid, returns undefined.
+     *
+     * @param {string} timeframe One of 'hour', 'day', 'week', '4weeks', or
+     *     'forever'.
+     * @returns {number} Milliseconds since epoch.
+     * @private
+     */
+    parseMilliseconds_: function (timeframe) {
+        var now = new Date().getTime();
+        var milliseconds = {
+            'hour': 60 * 60 * 1000,
+            'day': 24 * 60 * 60 * 1000,
+            'week': 7 * 24 * 60 * 60 * 1000,
+            '4weeks': 4 * 7 * 24 * 60 * 60 * 1000
+        };
 
-    if (milliseconds[timeframe])
-      return now - milliseconds[timeframe];
+        if (milliseconds[timeframe])
+            return now - milliseconds[timeframe];
 
-    if (timeframe === 'forever')
-      return 0;
+        if (timeframe === 'forever')
+            return 0;
 
-    return null;
-  },
+        return null;
+    },
 
-  /**
-   * Handle a success/failure callback from the `browsingData` API methods,
-   * updating the UI appropriately.
-   *
-   * @private
-   */
-  handleCallback_: function () {
-    var success = document.createElement('div');
-    success.classList.add('overlay');
-    success.setAttribute('role', 'alert');
-    success.textContent = 'Data has been cleared.';
-    document.body.appendChild(success);
+    /**
+     * Handle a success/failure callback from the `browsingData` API methods,
+     * updating the UI appropriately.
+     *
+     * @private
+     */
+    handleCallback_: function () {
+        var success = document.createElement('div');
+        success.classList.add('overlay');
+        success.setAttribute('role', 'alert');
+        success.textContent = 'Data has been cleared.';
+        document.body.appendChild(success);
 
-    setTimeout(function() { success.classList.add('visible'); }, 10);
-    setTimeout(function() {
-      if (close === false)
-        success.classList.remove('visible');
-      else
-        window.close();
-    }, 4000);
-  },
+        setTimeout(function () {
+            success.classList.add('visible');
+        }, 10);
+        setTimeout(function () {
+            if (close === false)
+                success.classList.remove('visible');
+            else
+                window.close();
+        }, 4000);
+    },
 
-  /**
-   * When a user clicks the button, this method is called: it reads the current
-   * state of `timeframe_` in order to pull a timeframe, then calls the clearing
-   * method with appropriate arguments.
-   *
-   * @private
-   */
-  handleClick_: function () {
-    var removal_start = this.parseMilliseconds_(this.timeframe_.value);
-    if (removal_start !== undefined) {
-      this.button_.setAttribute('disabled', 'disabled');
-      this.button_.innerText = 'Clearing...';
-      chrome.browsingData.remove({ "since" : removal_start }, {
-        "appcache": true,
-        "cache": true,
-        "cookies": true,
-        "downloads": true,
-        "fileSystems": true,
-        "formData": true,
-        "history": true,
-        "indexedDB": true,
-        "localStorage": true,
-        "serverBoundCertificates": true,
-        "pluginData": true,
-        "passwords": true,
-        "webSQL": true
-      }, this.handleCallback_.bind(this));
+    /**
+     * When a user clicks the button, this method is called: it reads the current
+     * state of `timeframe_` in order to pull a timeframe, then calls the clearing
+     * method with appropriate arguments.
+     *
+     * @private
+     */
+    handleClick_: function () {
+        var removal_start = this.parseMilliseconds_(this.timeframe_.value);
+        if (removal_start !== undefined) {
+            this.button_.setAttribute('disabled', 'disabled');
+            this.button_.innerText = 'Clearing...';
+            chrome.browsingData.remove({ "since": removal_start }, {
+                "appcache": true,
+                "cache": true,
+                "cookies": true,
+                "downloads": true,
+                "fileSystems": true,
+                "formData": true,
+                "history": true,
+                "indexedDB": true,
+                "localStorage": true,
+                "serverBoundCertificates": true,
+                "pluginData": true,
+                "passwords": true,
+                "webSQL": true
+            }, this.handleCallback_.bind(this));
+        }
     }
-  }
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-  window.PC = new PopupController();
+    window.PC = new PopupController();
 });

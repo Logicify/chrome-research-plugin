@@ -4,14 +4,14 @@
     "manifest_version": 2,
     "description": "Marks google search results",
     "browser_action": {
-        "default_icon": "icon.png",				
+        "default_icon": "icon.png",
         "default_popup": "popup.html"
     },
     "content_scripts": [
         {
-            "matches": [ 
+            "matches": [
                 "*://*.google.com/*",
-                "*://*.google.ru/*" 
+                "*://*.google.ru/*"
             ],
             "js": [
                 "googleMarker.js"

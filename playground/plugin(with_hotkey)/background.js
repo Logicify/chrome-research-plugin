@@ -3,30 +3,30 @@
 // found in the LICENSE file.
 
 // chrome.browserAction.onClicked.addListener(function() {
-  // chrome.windows.getCurrent(function(win) {
-    // chrome.tabs.getSelected(win.id, actionClicked);
-  // });
+// chrome.windows.getCurrent(function(win) {
+// chrome.tabs.getSelected(win.id, actionClicked);
+// });
 // });
 
 // var version = "1.0";
 
 // function actionClicked(tab) {
-  // chrome.debugger.attach({tabId:tab.id}, version, onAttach.bind(null, tab.id));
+// chrome.debugger.attach({tabId:tab.id}, version, onAttach.bind(null, tab.id));
 // }
 
 // function onAttach(tabId) {
-  // if (chrome.runtime.lastError) {
-    // alert(chrome.runtime.lastError.message);
-    // return;
-  // }
+// if (chrome.runtime.lastError) {
+// alert(chrome.runtime.lastError.message);
+// return;
+// }
 
-	// chrome.windows.create(
-		// {url: "browser_action.html?" + tabId, type: "popup", width: 300, height: 300});
+// chrome.windows.create(
+// {url: "browser_action.html?" + tabId, type: "popup", width: 300, height: 300});
 
 // }
 var s = document.createElement('content');
 s.src = chrome.extension.getURL("content.js");
-s.onload = function() {
+s.onload = function () {
     this.parentNode.removeChild(this);
 };
-(document.head||document.documentElement).appendChild(s);
+(document.head || document.documentElement).appendChild(s);
