@@ -1,15 +1,30 @@
 {
-	"manifest_version": 2
-	"name": "bookmarks" // There'll be a name of extension
-	"description": "Like bookmarks, but better"
-	"version": "0.1"
-	"permissions": [
-		
-	],
-	"background": {
-		"scripts": ["/js/background.js"]
-	}
-	"browser_action": {
-		"default_icon": "/img/32.png"
-	},
+    "name": "Research plugin",
+    "description": "Press Ctrl+Shift+Y to open the window of bookmark add...",
+    "version": "1.0",
+    "manifest_version": 2,
+    "background": {
+        "scripts": ["/js/background.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "tabs",
+        "<all_urls>",
+        "debugger",
+        "bookmarks"
+    ],
+    "browser_action": {
+        "default_popup": "/html/popup.html",
+        "default_icon": "/img/icon.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["/js/content.js"],
+            "run_at": "document_start"
+        }
+    ],
+    "web_accessible_resources": [
+        "/js/content.js"
+    ]
 }
