@@ -5,35 +5,36 @@ sdsdsdsdsdsDSDSDSDSDSDSDSDSDSDSDSDSDSDS<<<<<<< HEAD
 <html>
 >>>>>>> 2a1278da2a8d537164785a1fa8165e5e6b07e1a0
 <head>
-<script LANGUAGE="JavaScript">
-function convert(form) {
+    <script LANGUAGE="JavaScript">
+        function convert(form) {
 //получаем данные из поле ввода, преобразуя их в Integer
- base_from = parseInt(form.base_from.value);
- base_to = parseInt(form.base_to.value);
+            base_from = parseInt(form.base_from.value);
+            base_to = parseInt(form.base_to.value);
 //преобразуем данные по основанию base_from в десятичную систему
- num = parseInt(form.num.value, base_from);
+            num = parseInt(form.num.value, base_from);
 //преобразуем данные из десятичной в систему по указанному основанию base_to
- amount = num.toString(base_to);
+            amount = num.toString(base_to);
 //выводим результат
- form.amount.value = amount
-}
-</script>
+            form.amount.value = amount
+        }
+    </script>
 
-<title>inti</title>
+    <title>inti</title>
 </head>
 <body>
 <form name="Convert_form">
- <p><strong>Converter:</strong></p>
- <p> Translate <input type="text" name="num" size="8">
- from system <input type="text" name="base_from" size="8" value="10"
- onBlur="if ((this.value<1)||(this.value>36)){alert(
+    <p><strong>Converter:</strong></p>
+
+    <p> Translate <input type="text" name="num" size="8">
+        from system <input type="text" name="base_from" size="8" value="10"
+                           onBlur="if ((this.value<1)||(this.value>36)){alert(
  'Основание должно быть от 2 до 36.');this.select();this.focus();}">
- in system <input type="text" name="base_to" size="8" value="2"
- onBlur="if ((this.value<1)||(this.value>36)){alert(
+        in system <input type="text" name="base_to" size="8" value="2"
+                         onBlur="if ((this.value<1)||(this.value>36)){alert(
  'Основание должно быть от 2 до 36.');this.select();this.focus();}">
- <input type="button" value=" = " onclick="convert(this.form)">
- <input type="text" name="amount" size="15">
- </p>
+        <input type="button" value=" = " onclick="convert(this.form)">
+        <input type="text" name="amount" size="15">
+    </p>
 </form>
 <p align="left">only 2-36.</p>
 </body>
@@ -43,35 +44,36 @@ function convert(form) {
 <html>
 
 <head>
-<script LANGUAGE="JavaScript">
-function convert(form) {
+    <script LANGUAGE="JavaScript">
+        function convert(form) {
 //получаем данные из поле ввода, преобразуя их в Integer
- base_from = parseInt(form.base_from.value);
- base_to = parseInt(form.base_to.value);
+            base_from = parseInt(form.base_from.value);
+            base_to = parseInt(form.base_to.value);
 //преобразуем данные по основанию base_from в десятичную систему
- num = parseInt(form.num.value, base_from);
+            num = parseInt(form.num.value, base_from);
 //преобразуем данные из десятичной в систему по указанному основанию base_to
- amount = num.toString(base_to);
+            amount = num.toString(base_to);
 //выводим результат
- form.amount.value = amount
-}
-</script>
+            form.amount.value = amount
+        }
+    </script>
 
-<title>i</title>
+    <title>i</title>
 </head>
 <body>
 <form name="Convert_form">
- <p><strong>Converter:</strong></p>
- <p> Translate <input type="text" name="num" size="8">
- from system <input type="text" name="base_from" size="8" value="10"
- onBlur="if ((this.value<1)||(this.value>36)){alert(
+    <p><strong>Converter:</strong></p>
+
+    <p> Translate <input type="text" name="num" size="8">
+        from system <input type="text" name="base_from" size="8" value="10"
+                           onBlur="if ((this.value<1)||(this.value>36)){alert(
  'Основание должно быть от 2 до 36.');this.select();this.focus();}">
- in system <input type="text" name="base_to" size="8" value="2"
- onBlur="if ((this.value<1)||(this.value>36)){alert(
+        in system <input type="text" name="base_to" size="8" value="2"
+                         onBlur="if ((this.value<1)||(this.value>36)){alert(
  'Основание должно быть от 2 до 36.');this.select();this.focus();}">
- <input type="button" value=" = " onclick="convert(this.form)">
- <input type="text" name="amount" size="15">
- </p>
+        <input type="button" value=" = " onclick="convert(this.form)">
+        <input type="text" name="amount" size="15">
+    </p>
 </form>
 <p align="left">only 2-36.</p>
 </body>

@@ -11,7 +11,7 @@ function ghost(isDeactivated) {
     popup.frequency.disabled = isDeactivated; // The control manipulability.
 }
 
-function getValue ()  {
+function getValue() {
     var string = document.querySelector('input').value;
     return string;
 }
@@ -26,16 +26,17 @@ window.addEventListener('load', function () {
     popup.frequency.value = localStorage.frequency;
     // The display frequency, in minutes.
 
-    if (!popup.isActivated.checked) { ghost(true);
+    if (!popup.isActivated.checked) {
+        ghost(true);
     }
 
     // Set the display activation and frequency.
-    popup.isActivated.onchange = function() {
+    popup.isActivated.onchange = function () {
         localStorage.isActivated = popup.isActivated.checked;
         ghost(!popup.isActivated.checked);
     };
 
-    popup.frequency.onchange = function() {
+    popup.frequency.onchange = function () {
         localStorage.frequency = popup.frequency.value;
     };
 });

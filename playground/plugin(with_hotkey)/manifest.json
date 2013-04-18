@@ -9,7 +9,7 @@
     },
     "permissions": [
         "tabs",
-        "http://*",
+        "http://*/*",
         "debugger",
         "bookmarks"
     ],
@@ -19,15 +19,12 @@
     },
     "content_scripts": [
         {
-            "matches": ["http://*"],
-            "js": ["content.js"]
+            "matches": ["http://*/*"],
+            "js": ["content.js"],
+            "run_at": "document_start"
         }
     ],
-    "commands": {
-        "_execute_browser_action": {
-            "suggested_key": {
-                "default": "Ctrl+Shift+Y"
-            }
-        }
-    }
+    "web_accessible_resources": [
+        "/content.js"
+    ]
 }
