@@ -1,4 +1,13 @@
-﻿window.onload = function() {
+﻿function addRow(date,icon,url ){
+	var table=document.getElementById('historyTable');
+	var row = table.insertRow(1);
+	var cell1=row.insertCell(0);
+	var cell2=row.insertCell(1);
+	cell1.innerHTML = date;
+	cell2.innerHTML = ' <img src="' + icon + '"> ' + '<a href="' + url + '">' + url + '</a>';
+}
+
+window.onload = function() {
 	var time = new Date();
 	var path;
 	var icon;
@@ -47,8 +56,10 @@
 
 	for (var i = 0; i < 5; i++) {
 		var historyObject = localHistory[i];
-		var div = document.createElement("div");
+		addRow(historyObject.date, historyObject.icon, historyObject.url);
+		/* var div = document.createElement("div");
 		document.body.appendChild(div);
-		div.innerHTML = historyObject.date + ' <img src="' + historyObject.icon + '"> ' + '<a href="' + historyObject.url + '">' + historyObject.url + '</a>';
+		div.innerHTML = historyObject.date + ' <img src="' + historyObject.icon + '"> ' + '<a href="' + historyObject.url + '">' + historyObject.url + '</a>'; */
 	}
 }
+
