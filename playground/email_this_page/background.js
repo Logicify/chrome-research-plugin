@@ -9,10 +9,11 @@ chrome[runtimeOrExtension].onMessage.addListener(
         sendResponse({farewell: "OK!"});
         localStorage.setItem("page_title", request.page_data.title);
         localStorage.setItem("page_url", request.page_data.url.toString());
+        localStorage.setItem("page_icon", request.page_data.icon.toString());
     });
 //Show what it take from content script
 chrome.tabs.onCreated.addListener(function (tab) {
-    alert(localStorage.getItem("page_title") + localStorage.getItem("page_url"));
+    alert(localStorage.getItem("page_title") + localStorage.getItem("page_url") + localStorage.getItem("page_icon"));
 });
 
 //Send message to content script

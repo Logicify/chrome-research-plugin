@@ -49,14 +49,14 @@ window.onload = function() {
 	}];
 
 
-	localStorage.tempArr = JSON.stringify(localArray);
+	localStorage.tempArr = JSON.stringify(tempArr);
 
 
 	localHistory = JSON.parse(localStorage['tempArr']);
 
 	for (var i = 0; i < 5; i++) {
 		var historyObject = localHistory[i];
-		addRow(historyObject.date, historyObject.icon, historyObject.url);
+		addRow(historyObject.date, historyObject.icon, historyObject.title);
 		/* var div = document.createElement("div");
 		document.body.appendChild(div);
 		div.innerHTML = historyObject.date + ' <img src="' + historyObject.icon + '"> ' + '<a href="' + historyObject.url + '">' + historyObject.url + '</a>'; */
