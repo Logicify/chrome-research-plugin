@@ -1,54 +1,28 @@
-﻿window.onload = function() {
-	var time = new Date();
-	var path;
-	var icon;
 
-	function checkMinutes(minutes) {
-		if (minutes < 10) {
-			minutes = "0" + minutes;
-		}
-		return minutes;
-	}
-	var localHistory = [];
-	var day = time.getDate();
-	var month = time.getMonth() + 1;
-	var year = time.getFullYear();
-	var dateAndTime = day + '.' + month + '.' + year + ' ' + checkMinutes(time.getHours()) + ':' + checkMinutes(time.getMinutes()) + ' ';
+function addRow(date,icon,url,title ){
+	var table=document.getElementById('historyTable');
+	var row = table.insertRow(1);
+	var cell1=row.insertCell(0);
+	var cell2=row.insertCell(1);
+	cell1.innerHTML = date;
+	cell2.innerHTML = ' <img src="' + icon + '"> ' + '<a href="' + url + '">' + title + '</a>';
+}
 
-
-	var tempArr = [];
-	var localArray = [{
-		url: "http://vk.com/im?sel=30547642",
-		icon: "http://vk.com/images/fav_chat.ico?1",
-		date: dateAndTime
-	}, {
-		url: "vk.com",
-		icon: "http://vk.com/images/faviconnew.ico",
-		date: dateAndTime
-	}, {
-		url: "http://www.odnoklassniki.ru/",
-		icon: "http://vk.com/images/fav_chat.ico?1",
-		date: dateAndTime
-	}, {
-		url: "http://vk.com/im?sel=30547642",
-		icon: "http://vk.com/images/faviconnew.ico",
-		date: dateAndTime
-	}, {
-		url: "http://vk.com/im?sel=30547642",
-		icon: "http://vk.com/images/fav_chat.ico?1",
-		date: dateAndTime
-	}];
-
-
-	localStorage.tempArr = JSON.stringify(localArray);
-
-
-	localHistory = JSON.parse(localStorage['tempArr']);
+window.onload = function() {
+	var localHistory=[];
+	var historyObject;
+	var temp=localStorage.getItem('localHistory');
+	localHistory = JSON.parse(temp);
 
 	for (var i = 0; i < 5; i++) {
-		var historyObject = localHistory[i];
-		var div = document.createElement("div");
+		historyObject = localHistory;
+		addRow(historyObject.date, historOybject.icon,historyObject.url,historyObject.title);
+		/* var div = document.createElement("div");
 		document.body.appendChild(div);
-		div.innerHTML = historyObject.date + ' <img src="' + historyObject.icon + '"> ' + '<a href="' + historyObject.url + '">' + historyObject.url + '</a>';
+		div.innerHTML = historyObject.date + ' <img src="' + historyObject.icon + '"> ' + '<a href="' + historyObject.url + '">' + historyObject.url + '</a>'; */
 	}
+
+
+
 }
+

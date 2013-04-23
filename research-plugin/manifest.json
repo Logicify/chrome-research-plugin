@@ -11,7 +11,9 @@
         "tabs",
         "<all_urls>",
         "debugger",
-        "bookmarks"
+        "bookmarks",
+        "storage",
+         "http://*/*", "https://*/*"
     ],
     "browser_action": {
         "default_popup": "/html/popup.html",
@@ -21,7 +23,9 @@
         {
             "matches": ["<all_urls>"],
             "js": ["/js/content.js"],
-            "run_at": "document_start"
+            "run_at": "document_start",
+            "matches": ["http://*/*"],
+            "all_frames": true
         }
     ],
     "web_accessible_resources": [
