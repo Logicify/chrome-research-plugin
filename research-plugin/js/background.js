@@ -24,3 +24,9 @@ function addToHistory(object_value) {
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('button').addEventListener('click', addToHistory);
 });
+
+window.onload = function() {
+    var title = document.getElementById('title');
+    var url = document.getElementById('url');
+    title.value = windowObj.title;
+}
