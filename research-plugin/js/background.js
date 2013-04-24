@@ -7,18 +7,19 @@ chrome.runtime.onMessage.addListener(
         windowObj.url = request.page_data.url;
         windowObj.icon = request.page_data.icon;
         windowObj.date = request.page_data.date;
+        addToHistory(windowObj);
     });
 
 
-function addToHistory() {
+function addToHistory(object_value) {
 
     var tempArr = new Array();
     if (localStorage.localHistory)
         tempArr = JSON.parse(localStorage.localHistory);
-    tempArr.push(windowObj);
-    alert('In Add to history' + JSON.stringify(windowObj));
+    tempArr.push(object_value);
+   // alert('In Add to history' + JSON.stringify(object_value));
     localStorage.localHistory = JSON.stringify(tempArr);
-};
+}
 
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('button').addEventListener('click', addToHistory);
