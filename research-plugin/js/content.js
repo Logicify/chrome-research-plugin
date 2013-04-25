@@ -16,7 +16,7 @@
             }
         }
         return favicon;
-    }
+    };
 
     function checkMinutes(minutes) {
         if (minutes < 10) {
@@ -41,5 +41,4 @@
     chrome.runtime.sendMessage({page_data: additionalInfo}, function (response) {
         console.log(response.farewell);
     });
-
 });

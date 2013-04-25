@@ -1,4 +1,4 @@
-﻿var windowObj = {};
+﻿var windowObj ={};
 
 chrome.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
@@ -10,9 +10,7 @@ chrome.runtime.onMessage.addListener(
         addToHistory(windowObj);
     });
 
-
 function addToHistory(object_value) {
-
     var tempArr = new Array();
     if (localStorage.localHistory)
         tempArr = JSON.parse(localStorage.localHistory);
@@ -25,8 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('button').addEventListener('click', addToHistory);
 });
 
-window.onload = function() {
+
+window.onload = function(){
     var title = document.getElementById('title');
     var url = document.getElementById('url');
+    var icon = document.getElementById('icon');
     title.value = windowObj.title;
+    url.value = windowObj.url;
+    icon.value = windowObj.icon;
 }
