@@ -36,9 +36,11 @@
         "url": window.location.href,
         "icon": getFavicon(),
         "date": dateAndTime
-    };
+        },
+        runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
+            'runtime' : 'extension';
 
-    chrome.runtime.sendMessage({page_data: additionalInfo}, function (response) {
+    chrome[runtimeOrExtension].sendMessage({page_data: additionalInfo}, function (response) {
         console.log(response.farewell);
     });
 });

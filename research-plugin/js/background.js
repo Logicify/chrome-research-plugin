@@ -1,6 +1,8 @@
-﻿var windowObj ={};
+﻿var windowObj ={},
+    runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
+        'runtime' : 'extension';
 
-chrome.runtime.onMessage.addListener(
+chrome[runtimeOrExtension].onMessage.addListener(
     function (request, sender, sendResponse) {
         sendResponse({farewell: "OK!"});
         windowObj.title = request.page_data.title;
