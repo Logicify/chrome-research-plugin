@@ -4,14 +4,15 @@
     "version": "1.0",
     "manifest_version": 2,
     "background": {
-        "scripts": ["/js/background.js"],
-        "persistent": false
+        "scripts": ["/js/background.js"]
     },
     "permissions": [
         "tabs",
         "<all_urls>",
         "debugger",
-        "bookmarks"
+        "bookmarks",
+        "storage",
+         "http://*/*", "https://*/*"
     ],
     "browser_action": {
         "default_popup": "/html/popup.html",
@@ -21,7 +22,9 @@
         {
             "matches": ["<all_urls>"],
             "js": ["/js/content.js"],
-            "run_at": "document_start"
+            "run_at": "document_start",
+            "matches": ["http://*/*"],
+            "all_frames": true
         }
     ],
     "web_accessible_resources": [
