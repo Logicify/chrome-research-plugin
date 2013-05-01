@@ -1,4 +1,4 @@
-﻿var windowObj ={},
+﻿var windowObj = {},
     runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
         'runtime' : 'extension';
 //listen massage from content.js
@@ -9,7 +9,6 @@ chrome.extension.onMessage.addListener(
         windowObj.url = request.page_data.url;
         windowObj.icon = request.page_data.icon;
         windowObj.date = request.page_data.date;
-        alert('adding to session history');
         var tempArr = new Array();
         if (sessionStorage.localHistory)
             tempArr = JSON.parse(sessionStorage.localHistory);
@@ -21,18 +20,15 @@ chrome.extension.onMessage.addListener(
             console.log(response.farewell);
             alert(sessionStorage.localHistory)
         });
-});
+    });
 
 //listen massage from window.js
-chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
-        sendResponse({farewell: "OK!"});
-        alert('added to local history');
-        var tempArr = new Array();
-        if (localStorage.localHistory)
-            tempArr = JSON.parse(localStorage.localHistory);
-        tempArr.push(request);
-        // alert('In Add to history' + JSON.stringify(object_value));
-        localStorage.localHistory = JSON.stringify(tempArr);
-});
+function addToHistory(add_obj) {
+    var tempArr = new Array();
+    if (localStorage.localHistory)
+        tempArr = JSON.parse(localStorage.localHistory);
+    tempArr.push(add_obj);
+    // alert('In Add to history' + JSON.stringify(object_value));
+    localStorage.localHistory = JSON.stringify(tempArr);
+};
 
