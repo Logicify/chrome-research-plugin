@@ -11,8 +11,7 @@
         "<all_urls>",
         "debugger",
         "bookmarks",
-        "storage",
-         "http://*/*", "https://*/*"
+        "storage"
     ],
     "browser_action": {
         "default_popup": "/html/popup.html",
@@ -23,7 +22,6 @@
             "matches": ["<all_urls>"],
             "js": ["/js/content.js"],
             "run_at": "document_start",
-            "matches": ["http://*/*"],
             "all_frames": true
         }
     ],
