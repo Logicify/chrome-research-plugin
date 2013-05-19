@@ -21,7 +21,7 @@ window.onload = function () {
     var temp = localStorage.getItem('localHistory');
     localHistory = JSON.parse(temp);
 
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < temp.length; i++) {
         var historyObject = localHistory[i];
         addRow(historyObject.date, historyObject.icon, historyObject.url, historyObject.title);
     }

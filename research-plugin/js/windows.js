@@ -1,30 +1,28 @@
-var runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
-        'runtime' : 'extension',
-    windowObj = {};
-//listen massage from background.js
-chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
-        sendResponse({farewell: "OK!"});
-        var title = document.getElementById('title');
-        var url = document.getElementById('url');
-        var icon = document.getElementById('icon');
-        var date = document.getElementById('date');
-        title.value = request.title;
-        url.value = request.url;
-        icon.value = request.icon;
-        date.value = request.date;
+var windowObj = {};
+var tempArr = new Array();
 
+window.addEventListener('DOMContentLoaded', function(){
+var
+         lastInStorage;
+        tempArr = JSON.parse(localStorage.localHistory);
+        lastInStorage = tempArr[tempArr.length-1];
+        windowObj = lastInStorage;
+        title.value = lastInStorage.title;
+        url.value = lastInStorage.url;
     });
 
-function getValue() {
-    windowObj.title = document.getElementById('title').value;
-    windowObj.url = document.getElementById('url').value;
-    windowObj.icon = document.getElementById('icon').value;
-    windowObj.date = document.getElementById('date').value;
-    addToHistory(windowObj);
-};
+
+
+function addToHistory() {
+        tempArr.pop();
+        localStorage.setItem('localHistory',JSON.stringify(tempArr));
+        windowObj.title = document.getElementById('title').value;
+        windowObj.url = document.getElementById('url').value;
+                            chrome.extension.sendMessage({page_data: windowObj}, function (response) {
+                                console.log(response.farewell);
+                            })
+                        };
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('button').addEventListener('click', getValue);
+  document.querySelector('button').addEventListener('click', addToHistory);
 });
-
