@@ -1,0 +1,33 @@
+{
+    "name": "Research plugin",
+    "description": "Press Ctrl+Shift+Y to open the window of bookmark add...",
+    "version": "1.0",
+    "manifest_version": 2,
+    "background": {
+        "scripts": ["/js/background.js"]
+    },
+    "permissions": [
+        "tabs",
+        "<all_urls>",
+        "debugger",
+        "bookmarks",
+        "storage",
+         "http://*/*", "https://*/*"
+    ],
+    "browser_action": {
+        "default_popup": "/html/popup.html",
+        "default_icon": "/img/icon.png"
+    },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["/js/content.js"],
+            "run_at": "document_start",
+            "matches": ["http://*/*"],
+            "all_frames": true
+        }
+    ],
+    "web_accessible_resources": [
+        "/js/content.js"
+    ]
+}
