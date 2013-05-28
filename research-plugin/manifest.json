@@ -8,7 +8,6 @@
     },
     "permissions": [
         "tabs",
-        "<all_urls>",
         "debugger",
         "bookmarks",
         "storage",
@@ -27,6 +26,7 @@
             "all_frames": true
         }
     ],
+    
     "web_accessible_resources": [
         "/js/content.js"
     ]

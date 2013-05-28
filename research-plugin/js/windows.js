@@ -1,25 +1,18 @@
 var windowObj = {};
 var tempArr = new Array();
-
-window.addEventListener('DOMContentLoaded', function(){
-var
-         lastInStorage;
-        tempArr = JSON.parse(localStorage.localHistory);
-        lastInStorage = tempArr[tempArr.length-1];
-        windowObj = lastInStorage;
-        title.value = lastInStorage.title;
-        url.value = lastInStorage.url;
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    if(request.from == "background"){
+        windowObj = request.page_data;
+        title.value = windowObj.title;
+        url.value = windowObj.url;
+      } 
     });
 
 
-
 function addToHistory() {
-        tempArr.pop();
-        localStorage.setItem('localHistory',JSON.stringify(tempArr));
         windowObj.title = document.getElementById('title').value;
         windowObj.url = document.getElementById('url').value;
-                            chrome.extension.sendMessage({page_data: windowObj}, function (response) {
-                                console.log(response.farewell);
+        chrome.extension.sendMessage({page_data: windowObj, from: "window"}, function (response) {
                             })
                         };
 
