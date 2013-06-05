@@ -44,6 +44,10 @@ window.addEventListener("keydown", function(event) {
         });
 
 
-    } else return;
+    }*/
+    else 
+        if (modifier &&  event.keyCode == 67) var getText=window.getSelection());
+    else return ;
+
 
 })
