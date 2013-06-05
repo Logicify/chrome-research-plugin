@@ -1,10 +1,10 @@
 ﻿var runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
     'runtime' : 'extension';
-window.addEventListener("keydown", function(event) {
+window.addEventListener("keydown", function (event) {
     var modifier = event.ctrlKey || event.metaKey;
     if (modifier && event.shiftKey && event.keyCode == 89) {
 
-        var getFavicon = function() {
+        var getFavicon = function () {
             var favicon = undefined;
             var nodeList = document.getElementsByTagName("link");
             for (var i = 0; i < nodeList.length; i++) {
@@ -27,23 +27,22 @@ window.addEventListener("keydown", function(event) {
         var month = time.getMonth() + 1;
         var year = time.getFullYear();
         var dateAndTime = day + '.' + month + '.' + year + ' ' + checkMinutes(time.getHours()) + ':' + checkMinutes(time.getMinutes()) + ' ';
+
         var additionalInfo = {
             "title": document.title,
             "url": window.location.href,
             "icon": getFavicon(),
-            "date": dateAndTime,
-            "project": " "
+            "date": dateAndTime
         };
-
-
-        chrome.runtime.sendMessage({
-            page_data: additionalInfo,
-            from: "content"
-        }, function(response) {
+        //send massage to background.js
+        chrome.extension.sendMessage({page_data: additionalInfo}, function (response) {
             console.log(response.farewell);
+            window.open(chrome.extension.getURL("/html/window.html"), 'title', 'width=300, height=300, left=450, top=60');
         });
-
-
-    } else return;
-
+    }
+    else
+    {
+        return;
+    }
+    ;
 })
