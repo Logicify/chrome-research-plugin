@@ -12,7 +12,8 @@
         "debugger",
         "bookmarks",
         "storage",
-         "http://*/*", "https://*/*"
+         "http://*/*", "https://*/*",
+         "contextMenus"
     ],
     "browser_action": {
         "default_popup": "/html/popup.html",
