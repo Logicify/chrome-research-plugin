@@ -1,6 +1,7 @@
 function addRow(project, date, icon, url, title) {
     var table = document.getElementById('historyTable');
     var row = table.insertRow(1);
+    var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     if (icon === undefined) {
@@ -19,7 +20,7 @@ function addRow(project, date, icon, url, title) {
 }
 
 window.onload = function() {
-    var localHistory =[];
+    var localHistory = [];
     var temp = localStorage.getItem('localHistory');
     localHistory = JSON.parse(temp);
 
