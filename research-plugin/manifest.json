@@ -8,7 +8,7 @@
     },
     "permissions": [
         "tabs",
-        "<all_urls>",
+       
         "debugger",
         "bookmarks",
         "storage",
@@ -24,7 +24,7 @@
             "matches": ["<all_urls>"],
             "js": ["/js/content.js"],
             "run_at": "document_start",
-            "matches": ["http://*/*"],
+            "matches": ["http://*/*","https://*/*"],
             "all_frames": true
         }
     ],

@@ -1,4 +1,4 @@
-﻿var runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
+var runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
     'runtime' : 'extension';
 window.addEventListener("keydown", function(event) {
     var modifier = event.ctrlKey || event.metaKey;
@@ -13,7 +13,7 @@ window.addEventListener("keydown", function(event) {
                 }
             }
             return favicon;
-        };
+        };  
 
         function checkMinutes(minutes) {
             if (minutes < 10) {
@@ -44,9 +44,11 @@ window.addEventListener("keydown", function(event) {
         });
 
 
-    }*/
+    }
     else 
-        if (modifier &&  event.keyCode == 67) var getText=window.getSelection());
+        if (modifier &&  event.keyCode == 67) {
+            var getText=window.getSelection();
+            alert(getText);}
     else return ;
 
 
