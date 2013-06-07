@@ -19,6 +19,7 @@ function selectProjects() {
         for (var j = i + 1; j < tempArr.length; j++)
             if ((projectsArr[i] == projectsArr[j]) || (projectsArr[i - 1] == projectsArr[j]) || (projectsArr[i + 1] == projectsArr[j]))
                 projectsArr.splice(j, 1);
+  
 };
 
 function addOption(selectbox, text, value) {
@@ -33,32 +34,45 @@ window.onload = function () {
     for (var i = 0; i < projectsArr.length; ++i) {
         addOption(document.dropDown.selectProject, projectsArr[i], projectsArr[i]);
     }
-    document.dropDown.selectProject.selectedIndex = 1;
 }
 
 function addToHistory() {
     windowObj.title = document.getElementById('title').value;
     windowObj.url = document.getElementById('url').value;
     if (document.dropDown.selectProject.value == "New project")
+    {
+        if(document.getElementById('project').value=="")
+            {alert("Please enter project name"); return ;}
+        else 
         windowObj.project = document.getElementById('project').value;
+    }
     else
+    {
+         
+
         windowObj.project = document.dropDown.selectProject.value;
+    }
     chrome.extension.sendMessage({
         page_data: windowObj,
         from: "window"
     }, function (response) {
     })
 };
-
+function azaza(){
+        if(document.dropDown.selectProject.value=="New project")
+            document.getElementById('myinput').style.visibility = "visible";
+        else  document.getElementById('myinput').style.visibility = "hidden" ;
+}
+window.setInterval(azaza,500);
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('button').addEventListener('click', addToHistory);
 });
 //geting window.html ids
-chrome.windows.getCurrent(function (currentWindow) {
-    window_id = currentWindow.id;
+chrome.windows.getCurrent(function(currentWindow) {
+    window_id =  currentWindow.id;
 });
 
 //close window.html if not focused
-chrome.windows.onFocusChanged.addListener(function () {
+chrome.windows.onFocusChanged.addListener(function() {
     chrome.windows.remove(window_id);
 });
