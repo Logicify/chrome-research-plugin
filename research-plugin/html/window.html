@@ -2,29 +2,29 @@
 <head>
     <meta charset="utf-8">
     <script src="/js/windows.js"></script>
-    <link href="/css/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body style="width: 250px">
+<div class="pull-right">
+    <form name="dropDown">
+        <select name="selectProject">
+            <option selected>New project</option>
+        </select>
+    </form>
+    <div>Project:</div>
+    <input id="project" type="text" style="width: 220px; height: 30px"/>
 
-<div>
-<form name="dropDown">
-    <select name="selectProject">
-        <option selected>New project</option>
-    </select>
-</form>
-        <div>Project:</div>
-        <input id="project"/>
-        <div>Name:</div>
-        <input id="title"/>
-        <div>Url:</div>
-        <input id="url"/>
-        <img id="icon">
-   
+    <div>Name:</div>
+    <input id="title" type="text" style="width: 220px; height: 30px"/>
+
+    <div>Url:</div>
+    <input id="url" type="text" style="width: 220px; height: 30px"/>
+    <img id="icon">
 </div>
-<div>
-    <button class="addbookmark"> Add</button>
+<div class="pull-right">
+    <button id="addbookmark" class="btn btn-success"><i class="icon-star"></i> Add</button>
 </div>
 <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
+<script src="/js/bootstrap.js"></script>
 </body>
 </html>

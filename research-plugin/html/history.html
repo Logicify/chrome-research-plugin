@@ -1,48 +1,46 @@
 ﻿<html>
 <head>
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-<script src="/js/bootstrap-dropdown.js"></script>
-<script src="/js/bootstrap.min.js"></script>
-<script src="/js/history.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/history.js"></script>
 </head>
 <body>
-<!-- <ul class="span2 nav nav-list pull-left" zindex="300">
-                <li class="nav-header">Заголовок</li>
-                <li class="active"><a href="#">На главную</a></li>
-                <li><a href="#">Библиотека</a></li>
-                <li><a href="#">Приложения</a></li>
-                <li class="nav-header">Второй заголовок</li>
-                <li><a href="#">Профиль</a></li>
-                <li><a href="#">Настройки</a></li>
-                <li class="divider"></li>
-                <li><a href="#">Справка</a></li>
-</ul> -->
+<div class="container">
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="/html/history.html">All categories</a></li>
+            <li><a href="/html/history-bkm.html"><i class="icon-bookmark"></i> Bookmarks</a></li>
+            <li><a href="/html/history-img.html"><i class="icon-picture"></i> Images</a></li>
+            <li><a href="/html/history-txt.html"><i class="icon-list-alt"></i> Text</a></li>
+            <li><a href="/html/history-scsh.html"><i class="icon-camera"></i> Screenshots</a></li>
+        </ul>
+        <div class="span3">Select project:</div>
+        <div class="input-append">
+            <div class="pull-left">
+                <form name="dropDown">
+                    <select name="selectProject">
+                        <option selected>All projects</option>
+                    </select>
+                </form>
+            </div>
+            <div class="pull-right">
+                <input class="span9" id="appendedInputButton" style="height: 30px" type="text" placeholder='Search'>
+                <button class="btn" type="button"><i class="icon-search"></i> Find</button>
+            </div>
+        </div>
+        <table class="table table-striped" id='historyTable'>
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Source</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
 
-<div class="container" zindex="200">
-<div class="row">
-  <ul class="nav nav-tabs">
-    <li class="active"><a href="/html/history.html">All categories</a></li>
-    <li><a href="/html/history-bkm.html"><i class="icon-bookmark"></i> Bookmarks</a></li>
-    <li><a href="/html/history-img.html"><i class="icon-picture"></i> Images</a></li>
-    <li><a href="/html/history-txt.html"><i class="icon-list-alt"></i> Text</a></li>
-    <li><a href="/html/history-scsh.html"><i class="icon-camera"></i> Screenshots</a></li>
-  </ul>
-  <div class="input-append pull-right">
-    <input class="span6" id="appendedInputButton" style="height: 30px" type="text" placeholder='Search'><button class="btn" type="button"><i class="icon-search"></i> Find</button>
-  </div>
-  <table class="table table-striped" id='historyTable'>
-   <thead>
-    <tr>
-     <th>Date</th>
-   <th>Source</th>
-    </tr>
-   </thead>
-   <tbody>
-  <tr>
-    
-  </tr>
-   </tbody>
-</div>
+            </tr>
+            </tbody>
+    </div>
 </div>
 <div>
 </div>
