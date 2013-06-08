@@ -41,8 +41,9 @@ function addToHistory() {
     windowObj.url = document.getElementById('url').value;
     if (document.dropDown.selectProject.value == "New project")
     {
-        if(document.getElementById('project').value=="")
-            {alert("Please enter project name"); return ;}
+        if(document.getElementById('myinput').value==0){
+            alert("Please enter project name"); 
+            return ;}
         else 
         windowObj.project = document.getElementById('project').value;
     }
@@ -68,11 +69,11 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('button').addEventListener('click', addToHistory);
 });
 //geting window.html ids
-chrome.windows.getCurrent(function(currentWindow) {
+/*chrome.windows.getCurrent(function(currentWindow) {
     window_id =  currentWindow.id;
 });
 
 //close window.html if not focused
 chrome.windows.onFocusChanged.addListener(function() {
     chrome.windows.remove(window_id);
-});
+});*/
