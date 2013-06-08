@@ -45,7 +45,7 @@ function addToHistory() {
             alert("Please enter project name"); 
             return ;}
         else 
-        windowObj.project = document.getElementById('project').value;
+        windowObj.project = document.getElementById('myinput').value;
     }
     else
     {
