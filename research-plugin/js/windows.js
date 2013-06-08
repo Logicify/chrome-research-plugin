@@ -58,22 +58,23 @@ function addToHistory() {
         from: "window"
     }, function (response) {
     })
+    window.close();
 };
-function azaza(){
+function checkProject(){
         if(document.dropDown.selectProject.value=="New project")
             document.getElementById('myinput').style.visibility = "visible";
         else  document.getElementById('myinput').style.visibility = "hidden" ;
 }
-window.setInterval(azaza,500);
+window.setInterval(checkProject,500);
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('button').addEventListener('click', addToHistory);
 });
 //geting window.html ids
-/*chrome.windows.getCurrent(function(currentWindow) {
+chrome.windows.getCurrent(function(currentWindow) {
     window_id =  currentWindow.id;
 });
 
 //close window.html if not focused
 chrome.windows.onFocusChanged.addListener(function() {
     chrome.windows.remove(window_id);
-});*/
+});
