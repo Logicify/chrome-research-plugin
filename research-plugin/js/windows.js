@@ -15,10 +15,10 @@ function selectProjects() {
     for (var i = 0; i < tempArr.length; i++)
         projectsArr[i] = tempArr[i].project;
     projectsArr.sort();
-    for (var i = 0; i < tempArr.length; i++)
-        for (var j = i + 1; j < tempArr.length; j++)
-            if ((projectsArr[i] == projectsArr[j]) || (projectsArr[i - 1] == projectsArr[j]) || (projectsArr[i + 1] == projectsArr[j]))
-                projectsArr.splice(j, 1);
+for (var i = 0; i < projectsArr.length; i++) 
+          for (var j = i + 1; j < projectsArr.length;) 
+               if (projectsArr[i] == projectsArr[j]) projectsArr.splice(j, 1); 
+          else j++; 
   
 };
 
