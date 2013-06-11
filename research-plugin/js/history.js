@@ -19,31 +19,28 @@ var tempvar = [];
  
 function checkProject(){ 
 
-     var tmp1 = []; 
-     var tmp2 = localStorage.getItem('localHistory'); 
-     tmp1 = JSON.parse(tmp2); 
-     if (tempvar == document.dropDown.selectProject.value){ return;}
-     if (tempvar != document.dropDown.selectProject.value){ 
-     var UlList=document.getElementById('historyTable').getElementsByTagName('tr');
-     alert(UlList.length);
-for(i=1; i<UlList.length; i++)
-UlList[i].parentNode.removeChild(UlList[i])
-
-}
+    var tmp1 = []; 
+    var tmp2 = localStorage.getItem('localHistory'); 
+    tmp1 = JSON.parse(tmp2); 
+    if (tempvar == document.dropDown.selectProject.value){ return;}
+    if (tempvar != document.dropDown.selectProject.value){ 
+    var UlList=document.getElementById('historyTable').getElementsByTagName('tr');
+    for(i=1; i < (UlList.length + UlList.length); i++) 
+        UlList[i].parentNode.removeChild(UlList[i])
+    }
      for (var i = 0; i < tmp2.length; i++) { 
-          var tmp3 = tmp1[i] 
-          if (document.dropDown.selectProject.value==tmp3.project) { 
-
-               tempvar = document.dropDown.selectProject.value; 
-               addRow(tmp3.project, tmp3.date, tmp3.icon, tmp3.url, tmp3.title); 
-          } 
-          else if(document.dropDown.selectProject.value=="All projects"){
+        var tmp3 = tmp1[i] 
+        if (document.dropDown.selectProject.value==tmp3.project) { 
+            tempvar = document.dropDown.selectProject.value; 
+            addRow(tmp3.project, tmp3.date, tmp3.icon, tmp3.url, tmp3.title); 
+        } 
+        else if(document.dropDown.selectProject.value=="All projects"){
             tempvar = document.dropDown.selectProject.value; 
              addRow(tmp3.project, tmp3.date, tmp3.icon, tmp3.url, tmp3.title); }
-     } 
+        } 
  
 } 
-    window.setInterval(checkProject,5000);
+window.setInterval(checkProject,100);
 
 function addOption(selectbox, text, value) {
     var optn = document.createElement("option");
@@ -58,13 +55,12 @@ function addRow(project, date, icon, url, title) {
     cell1 = row.insertCell(0);
      cell2 = row.insertCell(1);
      cell3 = row.insertCell(2);
-    if (icon === undefined) {
+    if (icon === undefined)
         var icon_url = "../img/16.png";
-    } else if (icon.substring(0, 1) !== '/') {
+    else if (icon.substring(0, 1) !== '/') 
         var icon_url = icon;
-    } else {
+    else 
         var icon_url = url.substring(0, url.length) + icon;
-    }
     cell1.innerHTML = project;
     cell2.innerHTML = date;
     cell3.innerHTML = ' <img src="' + icon_url + '" height="16"> ' + '<a href="' + url + '">' + title + '</a>';
