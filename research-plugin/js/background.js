@@ -3,10 +3,11 @@ var windowObj = {},
     runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
         'runtime' : 'extension';
 /*chrome.contextMenus.create({title: "Test %s menu item", 
-    contexts:["selection"], 
-    onclick: function(info, tab){ sendSearch(info.selectionText); }
-});*/
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+ contexts:["selection"],
+ onclick: function(info, tab){ sendSearch(info.selectionText); }
+ });*/
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
     if (request.from == "window") {
         if (localStorage.localHistory)
@@ -19,7 +20,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
         chrome.runtime.sendMessage({
             page_data: windowObj,
             from: 'background'
-        }, function(response) {
+        }, function (response) {
 
         });
         sendResponse({

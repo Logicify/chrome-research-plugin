@@ -15,11 +15,11 @@ function selectProjects() {
     for (var i = 0; i < tempArr.length; i++)
         projectsArr[i] = tempArr[i].project;
     projectsArr.sort();
-for (var i = 0; i < projectsArr.length; i++) 
-          for (var j = i + 1; j < projectsArr.length;) 
-               if (projectsArr[i] == projectsArr[j]) projectsArr.splice(j, 1); 
-          else j++; 
-  
+    for (var i = 0; i < projectsArr.length; i++)
+        for (var j = i + 1; j < projectsArr.length;)
+            if (projectsArr[i] == projectsArr[j]) projectsArr.splice(j, 1);
+            else j++;
+
 };
 
 function addOption(selectbox, text, value) {
@@ -39,17 +39,16 @@ window.onload = function () {
 function addToHistory() {
     windowObj.title = document.getElementById('title').value;
     windowObj.url = document.getElementById('url').value;
-    if (document.dropDown.selectProject.value == "New project")
-    {
-        if(document.getElementById('myinput').value==0){
-            alert("Please enter project name"); 
-            return ;}
-        else 
-        windowObj.project = document.getElementById('myinput').value;
+    if (document.dropDown.selectProject.value == "New project") {
+        if (document.getElementById('myinput').value == 0) {
+            alert("Please enter project name");
+            return;
+        }
+        else
+            windowObj.project = document.getElementById('myinput').value;
     }
-    else
-    {
-         
+    else {
+
 
         windowObj.project = document.dropDown.selectProject.value;
     }
@@ -60,21 +59,21 @@ function addToHistory() {
     })
     window.close();
 };
-function checkProject(){
-        if(document.dropDown.selectProject.value=="New project")
-            document.getElementById('myinput').style.visibility = "visible";
-        else  document.getElementById('myinput').style.visibility = "hidden" ;
+function checkProject() {
+    if (document.dropDown.selectProject.value == "New project")
+        document.getElementById('myinput').style.visibility = "visible";
+    else  document.getElementById('myinput').style.visibility = "hidden";
 }
-window.setInterval(checkProject,500);
+window.setInterval(checkProject, 500);
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('button').addEventListener('click', addToHistory);
 });
 //geting window.html ids
-chrome.windows.getCurrent(function(currentWindow) {
-    window_id =  currentWindow.id;
+chrome.windows.getCurrent(function (currentWindow) {
+    window_id = currentWindow.id;
 });
 
 //close window.html if not focused
-chrome.windows.onFocusChanged.addListener(function() {
+chrome.windows.onFocusChanged.addListener(function () {
     chrome.windows.remove(window_id);
 });

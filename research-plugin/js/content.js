@@ -1,10 +1,10 @@
 var runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
     'runtime' : 'extension';
-window.addEventListener("keydown", function(event) {
+window.addEventListener("keydown", function (event) {
     var modifier = event.ctrlKey || event.metaKey;
     if (modifier && event.shiftKey && event.keyCode == 89) {
 
-        var getFavicon = function() {
+        var getFavicon = function () {
             var favicon = undefined;
             var nodeList = document.getElementsByTagName("link");
             for (var i = 0; i < nodeList.length; i++) {
@@ -13,7 +13,7 @@ window.addEventListener("keydown", function(event) {
                 }
             }
             return favicon;
-        };  
+        };
 
         function checkMinutes(minutes) {
             if (minutes < 10) {
@@ -39,17 +39,17 @@ window.addEventListener("keydown", function(event) {
         chrome.runtime.sendMessage({
             page_data: additionalInfo,
             from: "content"
-        }, function(response) {
+        }, function (response) {
             console.log(response.farewell);
         });
 
 
     }
-    else 
-        if (modifier &&  event.keyCode == 67) {
-            var getText=window.getSelection();
-            alert(getText);}
-    else return ;
+    else if (modifier && event.keyCode == 67) {
+        var getText = window.getSelection();
+        alert(getText);
+    }
+    else return;
 
 
 })
