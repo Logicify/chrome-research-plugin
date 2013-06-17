@@ -70,8 +70,15 @@ function addRow(project, date, icon, url, title) {
     cell1 = row.insertCell(0);
     cell2 = row.insertCell(1);
     cell3 = row.insertCell(2);
-    if (icon === undefined)
-        var icon_url = "../img/16.png";
+    if (icon === undefined) {
+        try {
+            var icon_url = get_domainname(url) + 'favicon.ico';
+        }
+        catch (err) {
+            console.log(err.message);
+            var icon_url = "../img/16.png";
+        }
+    }
     else if (icon.substring(0, 1) !== '/')
         var icon_url = icon;
     else
