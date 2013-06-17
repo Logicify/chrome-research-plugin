@@ -59,12 +59,18 @@ function addToHistory() {
     })
     window.close();
 };
+
 function checkProject() {
     if (document.dropDown.selectProject.value == "New project")
         document.getElementById('myinput').style.visibility = "visible";
     else  document.getElementById('myinput').style.visibility = "hidden";
 }
-window.setInterval(checkProject, 500);
+document.addEventListener( "DOMContentLoaded" , function () {
+  document.getElementById("sp").addEventListener("change" , checkProject);
+});
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('button').addEventListener('click', addToHistory);
 });
