@@ -3,6 +3,12 @@
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="/js/bootstrap.min.js"></script>
     <script src="/js/history.js"></script>
+    <style>
+        .highlight
+        {
+            background-color:yellow;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -24,11 +30,12 @@
                 </form>
             </div>
             <div class="pull-right">
-                <input class="span9" id="appendedInputButton" style="height: 30px" type="text" placeholder='Search'>
+                <input class="span9 filter" id="appendedInputButton" style="height: 30px" type="text"
+                       placeholder='Search'>
                 <button class="btn" type="button"><i class="icon-search"></i> Find</button>
             </div>
         </div>
-        <table class="table table-striped" id='historyTable'>
+        <table class="table table-striped filterable" id='historyTable'>
             <thead>
             <tr>
                 <th>Project</th>
@@ -41,6 +48,7 @@
 
             </tr>
             </tbody>
+        </table>
     </div>
 </div>
 <div>
