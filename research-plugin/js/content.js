@@ -28,6 +28,7 @@ window.addEventListener("keydown", function (event) {
         var year = time.getFullYear();
         var dateAndTime = day + '.' + month + '.' + year + ' ' + checkMinutes(time.getHours()) + ':' + checkMinutes(time.getMinutes()) + ' ';
         var additionalInfo = {
+            "typeoflink": "",
             "title": document.title,
             "url": window.location.href,
             "icon": getFavicon(),

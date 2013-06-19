@@ -2,12 +2,13 @@
 var tempArr = new Array();
 var projectsArr = new Array();
 
-function addRow(project, date, icon, url, title) {
+function addRow(typeoflink, project, date, icon, url, title) {
     var table = document.getElementById('historyTable');
     var row = table.insertRow(1);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(0);
+    var cell1 = row.insertCell(1);
+    var cell2 = row.insertCell(2);
+    var cell3 = row.insertCell(3);
     if (icon === undefined) {
         try {
             var icon_url = get_domainname(url) + 'favicon.ico';
@@ -21,6 +22,7 @@ function addRow(project, date, icon, url, title) {
     } else {
         var icon_url = url.substring(0, url.length) + icon;
     }
+    cell4.innerHTML = typeoflink;
     if (project)
         cell1.innerHTML = project;
     else
@@ -64,7 +66,7 @@ window.onload = function() {
 
     for (var i = 0; i < temp.length; i++) {
         var historyObject = localHistory[i];
-        addRow(historyObject.project, historyObject.date, historyObject.icon, historyObject.url, historyObject.title);
+        addRow(historyObject.typeoflink, historyObject.project, historyObject.date, historyObject.icon, historyObject.url, historyObject.title);
     }
 };
 
@@ -96,7 +98,7 @@ function checkProject() {
 
     for (var i = 0; i < localHistory.length; i++) {
         var tmp3 = localHistory[i];
-        addRow(tmp3.project, tmp3.date, tmp3.icon, tmp3.url, tmp3.title);
+        addRow(tmp3.typeoflink, tmp3.project, tmp3.date, tmp3.icon, tmp3.url, tmp3.title);
     }
 }
 // window.setInterval(checkProject,100);

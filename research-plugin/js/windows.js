@@ -37,6 +37,7 @@ window.onload = function () {
 }
 
 function addToHistory() {
+    windowObj.typeoflink = "Bookmark";
     windowObj.title = document.getElementById('title').value;
     windowObj.url = document.getElementById('url').value;
     if (document.dropDown.selectProject.value == "New project") {
