@@ -32,7 +32,8 @@ window.addEventListener("keydown", function (event) {
             "url": window.location.href,
             "icon": getFavicon(),
             "date": dateAndTime,
-            "project": " "
+            "project": " ",
+            "copy_text": window.getSelection().toString()
         };
 
 
@@ -43,11 +44,6 @@ window.addEventListener("keydown", function (event) {
             console.log(response.farewell);
         });
 
-
-    }
-    else if (modifier && event.keyCode == 67) {
-        var getText = window.getSelection();
-        alert(getText);
     }
     else return;
 

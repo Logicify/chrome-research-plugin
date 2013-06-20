@@ -1,4 +1,3 @@
-
 var tempArr = new Array();
 var projectsArr = new Array();
 
@@ -12,24 +11,22 @@ function addRow(project, date, icon, url, title) {
         try {
             var icon_url = get_domainname(url) + 'favicon.ico';
         }
-        catch (err) {   
+        catch (err) {
             console.log(err.message);
             var icon_url = "../img/16.png";
         }
     } else if (icon.substring(0, 1) !== '/') {
         var icon_url = icon;
     } else {
-        var icon_url = url.substring(0, url.length) + icon;
+        var icon_url = /*url.substring(0, url.length)*/get_domainname(url) + icon;
     }
     if (project)
         cell1.innerHTML = project;
     else
         cell1.innerHTML = 'No project';
     cell2.innerHTML = date;
-    cell3.innerHTML = ' <img src="' + icon_url + '" height="16"> ' + '<a href="' + url + '">' + title + '</a>';
+    cell3.innerHTML = '<a href="' + url + '">' + '<img src="' + icon_url + '" height="16">  ' + '</a>' + '<span>' + title + '</span>';
 }
-
-
 
 
 function selectProjects() {
@@ -40,7 +37,7 @@ function selectProjects() {
     for (var i = 0; i < projectsArr.length; i++)
         for (var j = i + 1; j < projectsArr.length;)
             if (projectsArr[i] == projectsArr[j]) projectsArr.splice(j, 1);
-        else j++;
+            else j++;
     //alert(projectsArr);
 };
 
@@ -51,7 +48,7 @@ function addOption(selectbox, text, value) {
     selectbox.options.add(optn);
 }
 
-window.onload = function() {
+window.onload = function () {
 
     selectProjects();
     for (var i = 0; i < projectsArr.length; ++i) {
@@ -85,13 +82,14 @@ function checkProject() {
     var localHistory = [];
     var tmp2 = localStorage.getItem('localHistory');
     localHistory = JSON.parse(tmp2);
-    localHistory = localHistory.filter(function(value) {
-                                                if (document.dropDown.selectProject.value == "All projects") return true;
-                                                else if (value.project == document.dropDown.selectProject.value) return true;
-                                                else return false; });
+    localHistory = localHistory.filter(function (value) {
+        if (document.dropDown.selectProject.value == "All projects") return true;
+        else if (value.project == document.dropDown.selectProject.value) return true;
+        else return false;
+    });
 
     var tableObject = document.getElementById('historyTable');
-    while (document.getElementById('historyTable').getElementsByTagName('tr').length > 1) 
+    while (document.getElementById('historyTable').getElementsByTagName('tr').length > 1)
         tableObject.deleteRow(1);
 
     for (var i = 0; i < localHistory.length; i++) {
@@ -100,16 +98,16 @@ function checkProject() {
     }
 }
 // window.setInterval(checkProject,100);
-document.addEventListener( "DOMContentLoaded" , function () {
-  document.getElementById("sp").addEventListener("change" , checkProject);
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("sp").addEventListener("change", checkProject);
 });
-
 
 
 window.addEventListener("keyup", function doSearch() {
     var searchText = document.getElementById('appendedInputButton').value;
     var targetTable = document.getElementById('historyTable');
     var targetTableColCount;
+    var patt = new RegExp("(" + searchText + ")", "gi");
 
     //Loop through table rows
     for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
@@ -122,17 +120,23 @@ window.addEventListener("keyup", function doSearch() {
         }
 
         //Process data rows. (rowIndex >= 1)
-        for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
-            rowData += targetTable.rows.item(rowIndex).cells.item(colIndex).textContent.toLowerCase();
+        for (var colIndex = 2; colIndex < targetTable.rows.item(rowIndex).cells.length ; colIndex++) {
+            var cellData = targetTable.rows.item(rowIndex).cells.item(colIndex).textContent;
+            //If search term is not found in row data
+            //then hide the row, else show
+            if (!searchText) {
+                targetTable.rows.item(rowIndex).style.display = 'table-row';
+            } else if (!patt.test(cellData)) {
+                targetTable.rows.item(rowIndex).style.display = 'none';
+            } else {
+                targetTable.rows.item(rowIndex).style.display = 'table-row';
+                cellData = cellData.replace(patt, "<b>$1</b>");
+                var node=document.createTextNode(cellData);
+                targetTable.rows.item(rowIndex).cells.item(colIndex).getElementsByTagName("span")[0].appendChild(node);
+            }
         }
 
-        //If search term is not found in row data
-        //then hide the row, else show
-        if (rowData.indexOf(searchText) == -1)
-            targetTable.rows.item(rowIndex).style.display = 'none';
-        else {
-            targetTable.rows.item(rowIndex).style.display = 'table-row';
-        }
+
 
     }
 });

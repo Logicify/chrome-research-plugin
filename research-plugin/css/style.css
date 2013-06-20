@@ -1,0 +1,12 @@
+table.table tbody tr td {
+    position: relative;
+}
+table.table tbody tr td a {
+    display: block;
+    padding: 7px;
+}
+table.table tbody tr td span {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+}
