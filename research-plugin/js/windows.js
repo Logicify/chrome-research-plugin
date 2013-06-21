@@ -30,19 +30,6 @@ function addOption(selectbox, text, value) {
 }
 
 window.onload = function () {
-    if (windowObj.copy_text !== '') {
-        var input = document.createElement("textarea"),
-            content = document.getElementsByClassName("content"),
-            newcontent = document.createElement("div"),
-            node = document.createTextNode(windowObj.copy_text);
-        input.setAttribute("id", "copy_text");
-        input.setAttribute("rows", 3);
-        newcontent.setAttribute("class", "content")
-        document.getElementsByClassName("pull-right")[0].removeChild(content[0])
-        document.getElementsByClassName("pull-right")[0].appendChild(newcontent)
-        input.appendChild(node);
-        content[0].appendChild(input);
-    }
     selectProjects();
     for (var i = 0; i < projectsArr.length; ++i) {
         addOption(document.dropDown.selectProject, projectsArr[i], projectsArr[i]);

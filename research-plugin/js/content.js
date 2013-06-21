@@ -4,7 +4,7 @@ window.addEventListener("keydown", function (event) {
     var modifier = event.ctrlKey || event.metaKey;
     if (modifier && event.shiftKey && event.keyCode == 89) {
 
-        var getFavicon = function () {
+        /*var getFavicon = function () {
             var favicon = undefined;
             var nodeList = document.getElementsByTagName("link");
             for (var i = 0; i < nodeList.length; i++) {
@@ -13,7 +13,7 @@ window.addEventListener("keydown", function (event) {
                 }
             }
             return favicon;
-        };
+        };*/
 
         function checkMinutes(minutes) {
             if (minutes < 10) {
@@ -31,9 +31,9 @@ window.addEventListener("keydown", function (event) {
             "typeoflink": "",
             "title": document.title,
             "url": window.location.href,
-            "icon": getFavicon(),
+            "icon": '',//getFavicon(),
             "date": dateAndTime,
-            "project": " ",
+            "project": '',
             "copy_text": window.getSelection().toString()
         };
 

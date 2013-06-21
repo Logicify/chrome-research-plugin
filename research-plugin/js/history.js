@@ -8,7 +8,7 @@ function addRow(typeoflink, project, date, icon, url, title) {
     var cell1 = row.insertCell(1);
     var cell2 = row.insertCell(2);
     var cell3 = row.insertCell(3);
-    if (icon === undefined) {
+   /* if (icon === undefined) {
         try {
             var icon_url = get_domainname(url) + 'favicon.ico';
         }
@@ -19,8 +19,9 @@ function addRow(typeoflink, project, date, icon, url, title) {
     } else if (icon.substring(0, 1) !== '/') {
         var icon_url = icon;
     } else {
-        var icon_url = /*url.substring(0, url.length)*/get_domainname(url) + icon;
-    }
+        var icon_url = *//*url.substring(0, url.length)*//*get_domainname(url) + icon;
+    }*/
+    icon_url = icon
     cell4.innerHTML = typeoflink;
     if (project)
         cell1.innerHTML = project;
@@ -50,7 +51,7 @@ function addOption(selectbox, text, value) {
     selectbox.options.add(optn);
 }
 
-window.onload = function () {
+window.onload = function() {
 
     selectProjects();
     for (var i = 0; i < projectsArr.length; ++i) {
@@ -67,6 +68,7 @@ window.onload = function () {
     }
 };
 
+/*
 function get_domainname(url) {
     var pos = 0;
 
@@ -78,6 +80,7 @@ function get_domainname(url) {
     }
     return url.substring(0, pos);
 }
+*/
 
 
 function checkProject() {
@@ -137,8 +140,5 @@ window.addEventListener("keyup", function doSearch() {
                 targetTable.rows.item(rowIndex).cells.item(colIndex).getElementsByTagName("span")[0].appendChild(node);
             }
         }
-
-
-
     }
 });
