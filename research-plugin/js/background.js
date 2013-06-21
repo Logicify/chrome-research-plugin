@@ -2,7 +2,7 @@
 var windowObj = {},
     runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
         'runtime' : 'extension';
-/*chrome.contextMenus.create({title: "Test %s menu item", 
+/*chrome.contextMenus.create({title: "Test %s menu item",
  contexts:["selection"],
  onclick: function(info, tab){ sendSearch(info.selectionText); }
  });*/
@@ -17,6 +17,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     } else if (request.from == "content") {
         window.open(chrome.extension.getURL("/html/window.html"), 'title', 'width=300, height=320, left=450, top=60');
         windowObj = request.page_data;
+        windowObj.icon = sender.tab.favIconUrl;
         chrome.runtime.sendMessage({
             page_data: windowObj,
             from: 'background'
