@@ -8,6 +8,7 @@ function addRow(typeoflink, project, date, icon, url, title) {
     var cell1 = row.insertCell(1);
     var cell2 = row.insertCell(2);
     var cell3 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
    /* if (icon === undefined) {
         try {
             var icon_url = get_domainname(url) + 'favicon.ico';
@@ -28,7 +29,8 @@ function addRow(typeoflink, project, date, icon, url, title) {
     else
         cell1.innerHTML = 'No project';
     cell2.innerHTML = date;
-    cell3.innerHTML = '<a href="' + url + '">' + '<img src="' + icon_url + '" height="16">  ' + '</a>' + '<span>' + title + '</span>';
+    cell3.innerHTML = '<a href="' + url + '">' + ' <img src="' + icon_url + '" height="16"> ' + '</a>';
+    cell5.innerHTML = title;
 }
 
 
@@ -125,19 +127,19 @@ window.addEventListener("keyup", function doSearch() {
         }
 
         //Process data rows. (rowIndex >= 1)
-        for (var colIndex = 2; colIndex < targetTable.rows.item(rowIndex).cells.length ; colIndex++) {
+        for (var colIndex = 4; colIndex < targetTable.rows.item(rowIndex).cells.length ; colIndex++) {
             var cellData = targetTable.rows.item(rowIndex).cells.item(colIndex).textContent;
             //If search term is not found in row data
             //then hide the row, else show
             if (!searchText) {
                 targetTable.rows.item(rowIndex).style.display = 'table-row';
+                targetTable.rows.item(rowIndex).cells.item(colIndex).innerHTML = cellData;
             } else if (!patt.test(cellData)) {
                 targetTable.rows.item(rowIndex).style.display = 'none';
             } else {
                 targetTable.rows.item(rowIndex).style.display = 'table-row';
-                cellData = cellData.replace(patt, "<b>$1</b>");
-                var node=document.createTextNode(cellData);
-                targetTable.rows.item(rowIndex).cells.item(colIndex).getElementsByTagName("span")[0].appendChild(node);
+                cellData = cellData.replace(patt, "<span style='background-color:yellow;'>$1</span>");
+                targetTable.rows.item(rowIndex).cells.item(colIndex).innerHTML = cellData;
             }
         }
     }
