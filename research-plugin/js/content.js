@@ -1,20 +1,9 @@
 var runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
     'runtime' : 'extension';
 window.addEventListener("keydown", function (event) {
-    var modifier = event.ctrlKey || event.metaKey;
+    var modifier = event.ctrlKey || event.metaKey,
+        copy_text = window.getSelection().toString();
     if (modifier && event.shiftKey && event.keyCode == 89) {
-
-        /*var getFavicon = function () {
-            var favicon = undefined;
-            var nodeList = document.getElementsByTagName("link");
-            for (var i = 0; i < nodeList.length; i++) {
-                if ((nodeList[i].getAttribute("rel") == "icon") || (nodeList[i].getAttribute("rel") == "shortcut icon")) {
-                    favicon = nodeList[i].getAttribute("href");
-                }
-            }
-            return favicon;
-        };*/
-
         function checkMinutes(minutes) {
             if (minutes < 10) {
                 minutes = "0" + minutes;
@@ -34,7 +23,7 @@ window.addEventListener("keydown", function (event) {
             "icon": '',//getFavicon(),
             "date": dateAndTime,
             "project": '',
-            "copy_text": window.getSelection().toString()
+            "copy_text": copy_text
         };
 
 

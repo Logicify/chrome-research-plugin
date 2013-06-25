@@ -1,36 +1,26 @@
 var tempArr = new Array();
 var projectsArr = new Array();
 
-function addRow(typeoflink, project, date, icon, url, title) {
+function addRow(local_info) {
     var table = document.getElementById('historyTable');
     var row = table.insertRow(1);
-    var cell4 = row.insertCell(0);
-    var cell1 = row.insertCell(1);
-    var cell2 = row.insertCell(2);
-    var cell3 = row.insertCell(3);
-    var cell5 = row.insertCell(4);
-   /* if (icon === undefined) {
-        try {
-            var icon_url = get_domainname(url) + 'favicon.ico';
-        }
-        catch (err) {
-            console.log(err.message);
-            var icon_url = "../img/16.png";
-        }
-    } else if (icon.substring(0, 1) !== '/') {
-        var icon_url = icon;
-    } else {
-        var icon_url = *//*url.substring(0, url.length)*//*get_domainname(url) + icon;
-    }*/
-    icon_url = icon
-    cell4.innerHTML = typeoflink;
-    if (project)
-        cell1.innerHTML = project;
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell5 = row.insertCell(3);
+    if (local_info.project)
+        cell1.innerHTML = local_info.project;
     else
         cell1.innerHTML = 'No project';
-    cell2.innerHTML = date;
-    cell3.innerHTML = '<a href="' + url + '">' + ' <img src="' + icon_url + '" height="16"> ' + '</a>';
-    cell5.innerHTML = title;
+    cell2.innerHTML = local_info.date;
+    cell3.innerHTML = '<a href="' + local_info.url + '">' + ' <img src="' + local_info.icon + '" height="16"> ' + '</a>';
+    if (local_info.copy_text) {
+        cell5.innerHTML = local_info.copy_text;
+        cell5.setAttribute('title', local_info.title);
+    }
+    else {
+        cell5.innerHTML = local_info.title;
+    }
 }
 
 
@@ -53,7 +43,7 @@ function addOption(selectbox, text, value) {
     selectbox.options.add(optn);
 }
 
-window.onload = function() {
+window.onload = function () {
 
     selectProjects();
     for (var i = 0; i < projectsArr.length; ++i) {
@@ -66,24 +56,9 @@ window.onload = function() {
 
     for (var i = 0; i < temp.length; i++) {
         var historyObject = localHistory[i];
-        addRow(historyObject.typeoflink, historyObject.project, historyObject.date, historyObject.icon, historyObject.url, historyObject.title);
+        addRow(historyObject);
     }
 };
-
-/*
-function get_domainname(url) {
-    var pos = 0;
-
-    for (var i = 0; i < 3 && url.length; i++) {
-        var foundPos = url.indexOf('/', pos);
-        if (foundPos == -1) break;
-
-        pos = foundPos + 1; // продолжить поиск со следующей
-    }
-    return url.substring(0, pos);
-}
-*/
-
 
 function checkProject() {
     var localHistory = [];
@@ -101,14 +76,13 @@ function checkProject() {
 
     for (var i = 0; i < localHistory.length; i++) {
         var tmp3 = localHistory[i];
-        addRow(tmp3.typeoflink, tmp3.project, tmp3.date, tmp3.icon, tmp3.url, tmp3.title);
+        addRow(tmp3);
     }
 }
 // window.setInterval(checkProject,100);
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("sp").addEventListener("change", checkProject);
 });
-
 
 window.addEventListener("keyup", function doSearch() {
     var searchText = document.getElementById('appendedInputButton').value;
@@ -127,7 +101,7 @@ window.addEventListener("keyup", function doSearch() {
         }
 
         //Process data rows. (rowIndex >= 1)
-        for (var colIndex = 4; colIndex < targetTable.rows.item(rowIndex).cells.length ; colIndex++) {
+        for (var colIndex = 3; colIndex < targetTable.rows.item(rowIndex).cells.length; colIndex++) {
             var cellData = targetTable.rows.item(rowIndex).cells.item(colIndex).textContent;
             //If search term is not found in row data
             //then hide the row, else show

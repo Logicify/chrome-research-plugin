@@ -2,6 +2,18 @@ var windowObj = {};
 var tempArr = new Array();
 var projectsArr = new Array();
 var window_id = 0;
+
+chrome.windows.onCreated.addListener(function () {
+    if (windowObj.copy_text) {
+        var content = document.getElementsByClassName('content')[0],
+            textarea = document.createElement('textarea'),
+            copy_text = document.createTextNode(windowObj.copy_text);
+        textarea.setAttribute('id', 'copy_text');
+        textarea.appendChild(copy_text);
+        content.appendChild(textarea);
+    }
+});
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.from == "background") {
         windowObj = request.page_data;
@@ -19,7 +31,6 @@ function selectProjects() {
         for (var j = i + 1; j < projectsArr.length;)
             if (projectsArr[i] == projectsArr[j]) projectsArr.splice(j, 1);
             else j++;
-
 };
 
 function addOption(selectbox, text, value) {
@@ -27,19 +38,23 @@ function addOption(selectbox, text, value) {
     optn.text = text;
     optn.value = value;
     selectbox.options.add(optn);
-}
+};
 
 window.onload = function () {
     selectProjects();
     for (var i = 0; i < projectsArr.length; ++i) {
         addOption(document.dropDown.selectProject, projectsArr[i], projectsArr[i]);
     }
-}
+};
 
 function addToHistory() {
-    windowObj.typeoflink = "Bookmark";
     windowObj.title = document.getElementById('title').value;
     windowObj.url = document.getElementById('url').value;
+    if (windowObj.copy_text) {
+        windowObj.typeoflink = "Text";
+        windowObj.copy_text = document.getElementById('copy_text').value;
+    }
+    windowObj.typeoflink = "Bookmark";
     if (document.dropDown.selectProject.value == "New project") {
         if (document.getElementById('myinput').value == 0) {
             alert("Please enter project name");
@@ -65,22 +80,22 @@ function checkProject() {
     if (document.dropDown.selectProject.value == "New project")
         document.getElementById('myinput').style.visibility = "visible";
     else  document.getElementById('myinput').style.visibility = "hidden";
-}
+};
+
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("sp").addEventListener("change", checkProject);
 });
 
-
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('button').addEventListener('click', addToHistory);
 });
+
 //geting window.html ids
 chrome.windows.getCurrent(function (currentWindow) {
     window_id = currentWindow.id;
 });
 
 //close window.html if not focused
-/*
  chrome.windows.onFocusChanged.addListener(function () {
  chrome.windows.remove(window_id);
- });*/
+ });
