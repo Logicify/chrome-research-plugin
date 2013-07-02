@@ -3,7 +3,7 @@ var tempArr = new Array();
 var projectsArr = new Array();
 var window_id = 0;
 
-chrome.windows.onCreated.addListener(function () {
+/*chrome.windows.onCreated.addListener(function () {
     if (windowObj.copy_text) {
         var content = document.getElementsByClassName('content')[0],
             textarea = document.createElement('textarea'),
@@ -12,13 +12,21 @@ chrome.windows.onCreated.addListener(function () {
         textarea.appendChild(copy_text);
         content.appendChild(textarea);
     }
-});
+});*/
 
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.from == "background") {
         windowObj = request.page_data;
         title.value = windowObj.title;
         url.value = windowObj.url;
+    }
+    if (windowObj.copy_text) {
+        var content = document.getElementsByClassName('content')[0],
+            textarea = document.createElement('textarea'),
+            copy_text = document.createTextNode(windowObj.copy_text);
+        textarea.setAttribute('id', 'copy_text');
+        textarea.appendChild(copy_text);
+        content.appendChild(textarea);
     }
 });
 
@@ -50,11 +58,11 @@ window.onload = function () {
 function addToHistory() {
     windowObj.title = document.getElementById('title').value;
     windowObj.url = document.getElementById('url').value;
+    windowObj.typeoflink = "Bookmark";
     if (windowObj.copy_text) {
         windowObj.typeoflink = "Text";
         windowObj.copy_text = document.getElementById('copy_text').value;
     }
-    windowObj.typeoflink = "Bookmark";
     if (document.dropDown.selectProject.value == "New project") {
         if (document.getElementById('myinput').value == 0) {
             alert("Please enter project name");
