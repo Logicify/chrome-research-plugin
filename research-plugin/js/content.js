@@ -2,20 +2,21 @@ var runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
         'runtime' : 'extension',
     additionalInfo = {};
 
-/*function checkMinutes(minutes) {
+function checkMinutes(minutes) {
  if (minutes < 10) {
  minutes = "0" + minutes;
  }
  return minutes;
  }
 
+
  function dateAndTime() {
  var time = new Date();
  var day = time.getDate();
  var month = time.getMonth() + 1;
  var year = time.getFullYear();
- return dateAndTime = day + '.' + month + '.' + year + ' ' + checkMinutes(time.getHours()) + ':' + checkMinutes(time.getMinutes()) + ' ';
- }*/
+ return day + '.' + month + '.' + year + ' ' + checkMinutes(time.getHours()) + ':' + checkMinutes(time.getMinutes()) + ' ';
+ }
 
 function handler(e) {
     e = event;
@@ -35,7 +36,7 @@ function handler(e) {
                     "typeoflink": "Images",
                     "title": document.title,
                     "url": window.location.href,
-                    "date": '',//dateAndTime(),
+                    "date": dateAndTime(),
                     "project": '',
                     "icon": '',
                     "image": element.src,
@@ -93,11 +94,14 @@ window.addEventListener("keydown", function (event) {
         var body = document.getElementsByTagName('body')[0],
             div = document.createElement('div');
         div.setAttribute('class', 'clickablediv');
-        div.style.position = 'fixed';
+        div.style.position = 'absolute';
         div.style.top = '0';
         div.style.left = '0';
-        div.style.width = '100%';
-        div.style.height = '100%';
+        div.style.width = document.body.clientWidth + 'px';
+        div.style.height = document.body.clientHeight + 'px';
+	div.style.zIndex = 10000;
+	div.style.background = 'white'; 
+	div.style.opacity = .3;
         div.textContent = '  ';
         if (!document.getElementsByClassName('clickablediv')[0])
             body.appendChild(div);
