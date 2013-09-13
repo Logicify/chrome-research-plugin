@@ -6,46 +6,47 @@
     <!--<script type="text/javascript" src="/js/superlink.jquery.js"></script>-->
     <script src="/js/history.js"></script>
     <style type="text/css">
-        tr.active td {
-            background: #FFFE9F;
-        }
+        tr.active td {background: #FFFE9F; }
     </style>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="span2">
-            <div class="span2"></div>
-            <input id="appendedInputButton" style="height: 30px; width: 220px" type="text" placeholder='Search'>
-
-            <form name="dropDown">
-                <select name=selectProject id="sp">
-                    <option selected>Select project</option>
-                </select>
-                <select name=selectCategory id="category">
-                    <option selected>All categories</option>
-                    <option selected>Bookmark</option>
-                </select>
-            </form>
-            <!--Sidebar content-->
+<div class="container">
+    <div class="row">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="/html/history.html">All categories</a></li>
+            <li><a href="/html/history-bkm.html"><i class="icon-bookmark"></i> Bookmarks</a></li>
+            <li><a href="/html/history-img.html"><i class="icon-picture"></i> Images</a></li>
+            <li><a href="/html/history-txt.html"><i class="icon-list-alt"></i> Text</a></li>
+            <li><a href="/html/history-scsh.html"><i class="icon-camera"></i> Screenshots</a></li>
+        </ul>
+        <div class="span3">Select project:</div>
+        <div class="input-append">
+            <div class="pull-left">
+                <form name="dropDown">
+                    <select name=selectProject id="sp">
+                        <option selected>All projects</option>
+                    </select>
+                </form>
+            </div>
+            <div class="pull-right">
+                <input class="span8" id="appendedInputButton" style="height: 30px" type="text" placeholder='Search'>
+                <button class="btn" type="button"><i class="icon-search"></i> Find</button>
+            </div>
         </div>
-        <div class="span10">
-            <!--Body content-->
-            <table class="table" id="historyTable">
-                <thead>
-                <tr>
-                    <th>Project</th>
-                    <th>Date</th>
-                    <th>Icon</th>
-                    <th>Source</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <table class="table table-striped" id='historyTable'>
+            <thead>
+            <tr>
+                <th>Project</th>
+                <th>Date</th>
+                <th>Icon</th>
+                <th>Source</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </div>
 <div>

@@ -18,9 +18,13 @@ function addRow(local_info) {
         cell5.innerHTML = local_info.copy_text;
         cell5.setAttribute('title', local_info.title);
     }
+    else if (local_info.image) {
+        cell5.innerHTML = '<a href="' + local_info.url + '">' + ' <img src="' + local_info.image + '" height="16"> ' + '</a>';
+    }
     else {
         cell5.innerHTML = local_info.title;
     }
+
 }
 
 
@@ -65,13 +69,13 @@ function checkProject() {
     var tmp2 = localStorage.getItem('localHistory');
     localHistory = JSON.parse(tmp2);
     localHistory = localHistory.filter(function (value) {
-        if (document.dropDown.selectProject.value == "Select project") return true;
+        if (document.dropDown.selectProject.value == "All projects") return true;
         else if (value.project == document.dropDown.selectProject.value) return true;
         else return false;
     });
 
     var tableObject = document.getElementById('historyTable');
-    while (document.getElementById('historyTable').getElementsByTagName('td').length > 1)
+    while (document.getElementById('historyTable').getElementsByTagName('tr').length > 1)
         tableObject.deleteRow(1);
 
     for (var i = 0; i < localHistory.length; i++) {
@@ -79,33 +83,9 @@ function checkProject() {
         addRow(tmp3);
     }
 }
-
-function checkCategory() {
-    var localHistory = [];
-    var tmp2 = localStorage.getItem('localHistory');
-    localHistory = JSON.parse(tmp2);
-    localHistory = localHistory.filter(function (value) {
-        if (document.dropDown.selectCategory.value == "All categories") return true;
-        else if (value.typeoflink == document.dropDown.selectCategory.value) return true;
-        else return false;
-    });
-
-    var tableObject = document.getElementById('historyTable');
-    while (document.getElementById('historyTable').getElementsByTagName('td').length > 1)
-        tableObject.deleteRow(1);
-
-    for (var i = 0; i < localHistory.length; i++) {
-        var tmp3 = localHistory[i];
-        addRow(tmp3);
-    }
-}
-
 // window.setInterval(checkProject,100);
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("sp").addEventListener("change", checkProject);
-});
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("category").addEventListener("change", checkCategory);
 });
 
 window.addEventListener("keyup", function doSearch() {

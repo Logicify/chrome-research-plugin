@@ -14,7 +14,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             tempArr = JSON.parse(localStorage.localHistory);
         tempArr.push(request.page_data);
         localStorage.localHistory = JSON.stringify(tempArr);
-    } else if (request.from == "content") {
+    }
+    else if (request.from == "content") {
         window.open(chrome.extension.getURL("/html/window.html"), 'title', 'width=300, height=320, left=450, top=60');
         windowObj = request.page_data;
         windowObj.icon = sender.tab.favIconUrl;

@@ -3,17 +3,6 @@ var tempArr = new Array();
 var projectsArr = new Array();
 var window_id = 0;
 
-/*chrome.windows.onCreated.addListener(function () {
-    if (windowObj.copy_text) {
-        var content = document.getElementsByClassName('content')[0],
-            textarea = document.createElement('textarea'),
-            copy_text = document.createTextNode(windowObj.copy_text);
-        textarea.setAttribute('id', 'copy_text');
-        textarea.appendChild(copy_text);
-        content.appendChild(textarea);
-    }
-});*/
-
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (request.from == "background") {
         windowObj = request.page_data;
@@ -27,6 +16,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         textarea.setAttribute('id', 'copy_text');
         textarea.appendChild(copy_text);
         content.appendChild(textarea);
+    }
+    if (windowObj.image) {
+        var img = document.getElementById('image');
+        img.setAttribute('src', windowObj.image);;
     }
 });
 
@@ -58,8 +51,10 @@ window.onload = function () {
 function addToHistory() {
     windowObj.title = document.getElementById('title').value;
     windowObj.url = document.getElementById('url').value;
-    windowObj.typeoflink = "Bookmark";
-    if (windowObj.copy_text) {
+    if (windowObj.typeoflink === '') {
+        windowObj.typeoflink = "Bookmark";
+    }
+    if (windowObj.copy_text && windowObj !== '') {
         windowObj.typeoflink = "Text";
         windowObj.copy_text = document.getElementById('copy_text').value;
     }
@@ -104,6 +99,7 @@ chrome.windows.getCurrent(function (currentWindow) {
 });
 
 //close window.html if not focused
+/*
  chrome.windows.onFocusChanged.addListener(function () {
  chrome.windows.remove(window_id);
- });
+ });*/
