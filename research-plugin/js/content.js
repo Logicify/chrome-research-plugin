@@ -3,32 +3,29 @@ var runtimeOrExtension = chrome.runtime && chrome.runtime.sendMessage ?
     additionalInfo = {};
 
 function checkMinutes(minutes) {
- if (minutes < 10) {
- minutes = "0" + minutes;
- }
- return minutes;
- }
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    return minutes;
+}
 
 
- function dateAndTime() {
- var time = new Date();
- var day = time.getDate();
- var month = time.getMonth() + 1;
- var year = time.getFullYear();
- return day + '.' + month + '.' + year + ' ' + checkMinutes(time.getHours()) + ':' + checkMinutes(time.getMinutes()) + ' ';
- }
+function dateAndTime() {
+    var time = new Date();
+    var day = time.getDate();
+    var month = time.getMonth() + 1;
+    var year = time.getFullYear();
+    return day + '.' + month + '.' + year + ' ' + checkMinutes(time.getHours()) + ':' + checkMinutes(time.getMinutes()) + ' ';
+}
 
 function handler(e) {
     e = event;
-    if (e.type === 'mouseover' && e.target.tagName.toLowerCase() === 'img') {
-        e.target.setAttribute('title', e.target.src.toString());
-    }
-    document.addEventListener('click', function (e) {
+    var div = document.getElementsByClassName('clickablediv')[0];
+    div.addEventListener('click', function (e) {
             var mouseX = e.pageX,
                 mouseY = e.pageY,
-                div = document.getElementsByClassName('clickablediv')[0];
-            mouseX = (mouseX < 0) ? 0 : mouseX;
-            mouseY = (mouseY < 0) ? 0 : mouseY;
+                mouseX = (mouseX < 0) ? 0 : mouseX - scrollX;
+            mouseY = (mouseY < 0) ? 0 : mouseY - scrollY;
             if (div) document.getElementsByTagName('body')[0].removeChild(div);
             var element = document.elementFromPoint(mouseX, mouseY);
             if (element.src) {
@@ -54,7 +51,6 @@ function handler(e) {
                 }, function (response) {
                     console.log(response.farewell);
                 });
-
             }
         }
     );
@@ -69,7 +65,7 @@ window.addEventListener("keydown", function (event) {
             "title": document.title,
             "url": window.location.href,
             "icon": '',
-            "date": '',//dateAndTime(),
+            "date": dateAndTime(),
             "project": '',
             "copy_text": copy_text
         };
@@ -99,15 +95,37 @@ window.addEventListener("keydown", function (event) {
         div.style.left = '0';
         div.style.width = document.body.clientWidth + 'px';
         div.style.height = document.body.clientHeight + 'px';
-	div.style.zIndex = 10000;
-	div.style.background = 'white'; 
-	div.style.opacity = .3;
+        div.style.zIndex = 10000;
+        div.style.background = 'white';
+        div.style.opacity = .3;
         div.textContent = '  ';
         if (!document.getElementsByClassName('clickablediv')[0])
             body.appendChild(div);
         handler();
     }
+    else if (modifier && event.shiftKey && event.keyCode == 67) {
+        var body = document.getElementsByTagName('body')[0],
+            div = document.createElement('div');
+        div.setAttribute('class', 'clickablediv');
+        div.style.position = 'absolute';
+        div.style.top = '0';
+        div.style.left = '0';
+        div.style.width = document.body.clientWidth + 'px';
+        div.style.height = document.body.clientHeight + 'px';
+        div.style.zIndex = 10000;
+        div.style.background = 'white';
+        div.style.opacity = .3;
+        div.textContent = '  ';
+        if (!document.getElementsByClassName('clickablediv')[0])
+            body.appendChild(div);
+        /*html2canvas(document.body, {
+            onrendered: function(canvas) {
+                div.appendChild(canvas);
+            }
+        })*/
+        div.addEventListener('mousedown', function (event) {
+
+        })
+    }
     else return;
-
-
 })
