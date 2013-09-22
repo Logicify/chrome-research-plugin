@@ -1,8 +1,13 @@
 <html>
 <head>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="/css/style.css">-->
     <script src="/js/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="/js/superlink.jquery.js"></script>-->
     <script src="/js/history.js"></script>
+    <style type="text/css">
+        tr.active td {background: #FFFE9F; }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -18,30 +23,33 @@
         <div class="input-append">
             <div class="pull-left">
                 <form name="dropDown">
-                    <select name="selectProject">
+                    <select name=selectProject id="sp">
                         <option selected>All projects</option>
                     </select>
                 </form>
             </div>
             <div class="pull-right">
-                <input class="span9" id="appendedInputButton" style="height: 30px" type="text" placeholder='Search'>
+                <input class="span8" id="appendedInputButton" style="height: 30px" type="text" placeholder='Search'>
                 <button class="btn" type="button"><i class="icon-search"></i> Find</button>
             </div>
         </div>
-        <table class="table table-striped" id='imgTable'>
+        <table class="table table-striped" id='historyTable'>
             <thead>
             <tr>
                 <th>Project</th>
                 <th>Date</th>
+                <th>Icon</th>
                 <th>Source</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-
             </tr>
             </tbody>
+        </table>
     </div>
+</div>
+<div>
 </div>
 </body>
 </html>

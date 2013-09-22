@@ -30,7 +30,7 @@ function handler(e) {
             var element = document.elementFromPoint(mouseX, mouseY);
             if (element.src) {
                 additionalInfo = {
-                    "typeoflink": "Images",
+                    "typeoflink": "Image",
                     "title": document.title,
                     "url": window.location.href,
                     "date": dateAndTime(),
