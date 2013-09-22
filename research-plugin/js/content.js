@@ -78,6 +78,7 @@ window.addEventListener("keydown", function (event) {
         });
 
     }
+
     else if (modifier && event.shiftKey && event.keyCode == 83) {
         var width = 0,
             height = 0;
@@ -103,29 +104,6 @@ window.addEventListener("keydown", function (event) {
             body.appendChild(div);
         handler();
     }
-    else if (modifier && event.shiftKey && event.keyCode == 67) {
-        var body = document.getElementsByTagName('body')[0],
-            div = document.createElement('div');
-        div.setAttribute('class', 'clickablediv');
-        div.style.position = 'absolute';
-        div.style.top = '0';
-        div.style.left = '0';
-        div.style.width = document.body.clientWidth + 'px';
-        div.style.height = document.body.clientHeight + 'px';
-        div.style.zIndex = 10000;
-        div.style.background = 'white';
-        div.style.opacity = .3;
-        div.textContent = '  ';
-        if (!document.getElementsByClassName('clickablediv')[0])
-            body.appendChild(div);
-        /*html2canvas(document.body, {
-            onrendered: function(canvas) {
-                div.appendChild(canvas);
-            }
-        })*/
-        div.addEventListener('mousedown', function (event) {
 
-        })
-    }
     else return;
 })
