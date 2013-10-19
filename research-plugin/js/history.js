@@ -1,4 +1,4 @@
-var tempArr = new Array() ;
+var tempArr = new Array();
 var projectsArr = new Array();
 
 function addRow(local_info) {
